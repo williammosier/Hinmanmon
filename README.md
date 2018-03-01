@@ -3,21 +3,21 @@
     * Github URL
     * Project Demo Presentation as Google Slide URL
 Example:
-# Project Title
+# Hinman-mon
 ## CS 110 Final Project
-### Semester, Year
+### Spring, 2018
 
-[https://github.com/<repo>](#)
+https://github.com/binghamtonuniversity-cs110/final-project-spr18-dream-team-meme-team
 
 [link to demo presentation slides](#)
 
-### Team:
-#### Team Names
+### Dream Team, Meme Team:
+#### William Mosier, Christopher Woloshyn, Michael Yip
 
 ***
 
 ## Project Description
-Give an overview of your project
+We are attempting to create a version of Pokemon themed around Hinman College
 
 ***    
 
