@@ -1,27 +1,31 @@
 import pygame
+import random
+
 pygame.init()
-"""class Hinmanmon(self):
-	
+
+class Hinmanmon():
 	def __init__(self):
 		self.stats = []
 		self.type = ""
 		self.status = "normal"
 
-	def statusEffect(self):
-		self.status = 
+	def changeHealth(self):
+		pass
 
-	def 
-"""
 class location():
-	def __init__(self,file,x,y):
+	def __init__(self,file,x,y,width,height):
 		self.file = file
 		self.x = x
 		self.y = y
+		self.width = width
+		self.height = height
 
 class player():
 	def __init__(self,file,x,y):
 		self.x = x
 		self.y = y
+		self.width = 40
+		self.height = 40
 		self.velocity = 5
 		self.mon = []
 		self.walk = 0
@@ -42,43 +46,47 @@ class trainer():
 def battle(p1,enemy):
 	pass
 
-"""def move():
+def move(loc,p1):
 	keys = pygame.key.get_pressed()
 
 	if keys[pygame.K_LEFT] and p1.x > 0:
-		if loc1.x == 0:
+		if loc.x == 0 or p1.x >= WIDTH//2 + p1.width//2:
 			p1.x -= p1.velocity
 		else:
-			loc1.x += p1.velocity
-	if keys[pygame.K_RIGHT] and p1.x < 460:
-		if loc1.x == -700 or p1.x <= 250:
+			loc.x += p1.velocity
+	if keys[pygame.K_RIGHT] and p1.x < WIDTH + p1.width:
+		if loc.x == -loc.width + WIDTH or p1.x < WIDTH//2 - p1.width//2:
 			p1.x += p1.velocity
 		else:
-			loc1.x -= p1.velocity
+			loc.x -= p1.velocity
 	if keys[pygame.K_UP] and p1.y > 0:
-		if loc1.y == 0:
+		if loc.y == 0 or p1.y >= HEIGHT//2 + p1.height//2:
 			p1.y -= p1.velocity
 		else:
-			loc1.y += p1.velocity
-	if keys[pygame.K_DOWN] and p1.y < 440:
-		if loc1.y == -1000:
+			loc.y += p1.velocity
+	if keys[pygame.K_DOWN] and p1.y < HEIGHT - p1.height:
+		if loc.y == -loc.height + HEIGHT or p1.y < HEIGHT//2 - p1.height//2:
 			p1.y += p1.velocity
 		else:
-			loc1.y -= p1.velocity"""
+			loc.y -= p1.velocity
 
 def redraw(win,loc,p1):
 	win.blit(loc.file,(loc.x,loc.y))
 	p1.draw(win)
 	pygame.display.update()
 
+WIDTH = 600
+HEIGHT = 400
+
 def main():
 	run = True
 
 	char = [pygame.image.load('art/player_male_sprite_standing.png'),pygame.image.load('art/player_male_sprite_leftstep.png'),pygame.image.load('art/player_male_sprite_rightstep.png')]
-	p1 = player(char,250,250)
-	loc1 = location(pygame.image.load('art/hinman_prototype.png'),-200,-500)
+	p1 = player(char,WIDTH//2 - 20,HEIGHT//2 - 20)
+	locs = [location(pygame.image.load('art/hinman_prototype.png'),-200,-500,1600,1600)]
+	loc = 0
 
-	win = pygame.display.set_mode((500,500))
+	win = pygame.display.set_mode((WIDTH,HEIGHT))
 	pygame.display.set_caption("Hinmanmon")
 
 	while run:
@@ -88,29 +96,7 @@ def main():
 			if event.type == pygame.QUIT:
 				run = False
 
-		keys = pygame.key.get_pressed()
-
-		if keys[pygame.K_LEFT] and p1.x > 0:
-			if loc1.x == 0:
-				p1.x -= p1.velocity
-			else:
-				loc1.x += p1.velocity
-		if keys[pygame.K_RIGHT] and p1.x < 460:
-			if loc1.x == -700 or p1.x <= 250:
-				p1.x += p1.velocity
-			else:
-				loc1.x -= p1.velocity
-		if keys[pygame.K_UP] and p1.y > 0:
-			if loc1.y == 0:
-				p1.y -= p1.velocity
-			else:
-				loc1.y += p1.velocity
-		if keys[pygame.K_DOWN] and p1.y < 440:
-			if loc1.y == -1000:
-				p1.y += p1.velocity
-			else:
-				loc1.y -= p1.velocity
-		#move()
-		redraw(win,loc1,p1)
+		move(locs[loc],p1)
+		redraw(win,locs[loc],p1)
 	pygame.quit()
 main()
