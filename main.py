@@ -83,9 +83,9 @@ HEIGHT = 400
 def main():
 	run = True
 
-	char = [pygame.image.load('art/player_male_sprite_standing.png'),pygame.image.load('art/player_male_sprite_leftstep.png'),pygame.image.load('art/player_male_sprite_rightstep.png')]
+	char = [pygame.image.load('art/sprites/player_male_sprite_standing.png'),pygame.image.load('art/sprites/player_male_sprite_leftstep.png'),pygame.image.load('art/sprites/player_male_sprite_rightstep.png')]
 	p1 = player(char,WIDTH//2 - 20,HEIGHT//2 - 20)
-	locs = [location(pygame.image.load('art/hinman_prototype.png'),-200,-500,1600,1600)]
+	locs = [location(pygame.image.load('art/environment/hinman_college.png'),-200,-500,3200,3200)]
 	loc = 0
 
 	win = pygame.display.set_mode((WIDTH,HEIGHT))
