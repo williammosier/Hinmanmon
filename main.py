@@ -69,6 +69,8 @@ def move(loc,p1):
 			p1.y += p1.velocity
 		else:
 			loc.y -= p1.velocity
+	if not(keys[pygame.K_LEFT]) and not(keys[pygame.K_RIGHT]) and not(keys[pygame.K_UP]) and not(keys[pygame.K_DOWN]):
+		p1.walk = 0
 
 def redraw(win,loc,p1):
 	win.blit(loc.file,(loc.x,loc.y))
