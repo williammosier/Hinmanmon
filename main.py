@@ -1,4 +1,5 @@
 import pygame
+from pygame import *
 import random
 
 pygame.init()
@@ -54,23 +55,32 @@ def move(loc,p1):
 			p1.x -= p1.velocity
 		else:
 			loc.x += p1.velocity
+
 	if keys[pygame.K_RIGHT] and p1.x < WIDTH + p1.width:
 		if loc.x == -loc.width + WIDTH or p1.x < WIDTH//2 - p1.width//2:
 			p1.x += p1.velocity
 		else:
 			loc.x -= p1.velocity
+
 	if keys[pygame.K_UP] and p1.y > 0:
 		if loc.y == 0 or p1.y >= HEIGHT//2 + p1.height//2:
 			p1.y -= p1.velocity
 		else:
 			loc.y += p1.velocity
+
 	if keys[pygame.K_DOWN] and p1.y < HEIGHT - p1.height:
 		if loc.y == -loc.height + HEIGHT or p1.y < HEIGHT//2 - p1.height//2:
 			p1.y += p1.velocity
 		else:
 			loc.y -= p1.velocity
+
 	if not(keys[pygame.K_LEFT]) and not(keys[pygame.K_RIGHT]) and not(keys[pygame.K_UP]) and not(keys[pygame.K_DOWN]):
 		p1.walk = 0
+
+def playSong():
+	mixer.init()
+	mixer.music.load('music/death.ogg')
+	mixer.music.play()
 
 def redraw(win,loc,p1):
 	win.blit(loc.file,(loc.x,loc.y))
@@ -85,14 +95,16 @@ def main():
 
 	char = [pygame.image.load('art/sprites/player_male_sprite_standing.png'),pygame.image.load('art/sprites/player_male_sprite_leftstep.png'),pygame.image.load('art/sprites/player_male_sprite_rightstep.png')]
 	p1 = player(char,WIDTH//2 - 20,HEIGHT//2 - 20)
-	locs = [location(pygame.image.load('art/environment/hinman_college.png'),-200,-500,3200,3200)]
+	locs = [location(pygame.image.load('art/environment/hinman_college.png'),-2280,-1235,2600,2600)]
 	loc = 0
 
 	win = pygame.display.set_mode((WIDTH,HEIGHT))
 	pygame.display.set_caption("Hinmanmon")
 
+	playSong()
+
 	while run:
-		pygame.time.delay(100)
+		pygame.time.delay(50)
 
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
