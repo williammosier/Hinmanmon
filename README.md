@@ -17,7 +17,7 @@ https://github.com/binghamtonuniversity-cs110/final-project-spr18-dream-team-mem
 ***
 
 ## Project Description
-We are attempting to create a version of Pokemon themed around Hinman College
+We are attempting to create a game similar to that of the Pokemon Franchise themed around the residential community Hinman College. A few years ago, there was an RA event in Roosevelt hall that was Pokemon theme. The staff promised the participants a fan made copy of Pokemon themed in Hinman, with references to the community. Unfortunately, they never delivered.
 
 ***    
 
