@@ -65,38 +65,53 @@ def isNotCollided():
 def locationChange():
 	musicChange()
 
-def move(loc,p1):
-	keys = pygame.key.get_pressed()
-
-	offset = (p1.x - loc.x,p1.y - loc.y)
-	result = loc.mask.overlap(p1.mask,offset)
-	if result:
-		pygame.display.set_caption("HIT")
-	else:
-		pygame.display.set_caption("NO HIT")
-
+def moveLeft(loc,p1,keys):
 	if keys[pygame.K_LEFT] and p1.x > 0:
 		if loc.x == 0 or p1.x >= WIDTH//2 + p1.width//2:
 			p1.x -= p1.velocity
 		else:
 			loc.x += p1.velocity
+
+def moveRight(loc,p1,keys):
 	if keys[pygame.K_RIGHT] and p1.x < WIDTH + p1.width:
 		if loc.x == -loc.width + WIDTH or p1.x < WIDTH//2 - p1.width//2:
 			p1.x += p1.velocity
 		else:
 			loc.x -= p1.velocity
+
+def moveUp(loc,p1,keys):
 	if keys[pygame.K_UP] and p1.y > 0:
 		if loc.y == 0 or p1.y >= HEIGHT//2 + p1.height//2:
 			p1.y -= p1.velocity
 		else:
 			loc.y += p1.velocity
+
+def moveDown(loc,p1,keys):
 	if keys[pygame.K_DOWN] and p1.y < HEIGHT - p1.height:
 		if loc.y == -loc.height + HEIGHT or p1.y < HEIGHT//2 - p1.height//2:
 			p1.y += p1.velocity
 		else:
 			loc.y -= p1.velocity
-	if not(keys[pygame.K_LEFT]) and not(keys[pygame.K_RIGHT]) and not(keys[pygame.K_UP]) and not(keys[pygame.K_DOWN]):
+
+def isMoving(p1,keys):
+	if (not(keys[pygame.K_LEFT]) and not(keys[pygame.K_RIGHT]) and not(keys[pygame.K_UP]) and not(keys[pygame.K_DOWN])) or (keys[pygame.K_LEFT] and keys[pygame.K_RIGHT]) or (keys[pygame.K_UP] and keys[pygame.K_DOWN]):
 		p1.walk = 0
+
+def move(loc,p1):
+	keys = pygame.key.get_pressed()
+	offset = (p1.x - loc.x,p1.y - loc.y)
+	result = loc.mask.overlap(p1.mask,offset)
+
+	if result:
+		pygame.display.set_caption("HIT")
+	else:
+		pygame.display.set_caption("NO HIT")
+
+	moveLeft(loc,p1,keys)
+	moveRight(loc,p1,keys)
+	moveUp(loc,p1,keys)
+	moveDown(loc,p1,keys)
+	isMoving(p1,keys)
 
 def musicChange():
 	pass
@@ -126,15 +141,15 @@ def main():
 	#instantiating the player object
 	char = [pygame.image.load('art/sprites/player_male_sprite_standing.png'),pygame.image.load('art/sprites/player_male_sprite_leftstep.png'),pygame.image.load('art/sprites/player_male_sprite_rightstep.png')]
 	p1 = player(char,WIDTH//2 - 20,HEIGHT//2 - 20)
-	pmask = pygame.image.load('art/sprites/player_sprite_mask.png').convert_alpha()
+	pmask = pygame.image.load('art/sprites/player_mask.png').convert_alpha()
 	p1.mask = pygame.mask.from_surface(pmask)
 
 	#instantiating the location objects and setting current location
-	locs = [location(pygame.image.load('art/environment/hinman_college(1).png'),pygame.image.load('art/environment/hinman_college_mask (1).png').convert_alpha(),-200,-500,3200,3200)]
+	locs = [location(pygame.image.load('art/environment/hinman_college.png'),pygame.image.load('art/environment/hinman_college_mask.png').convert_alpha(),-200,-500,3200,3200)]
 	loc = 0
 
 	while run:
-		pygame.time.delay(100)
+		pygame.time.delay(50)
 
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
