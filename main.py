@@ -13,6 +13,7 @@ class Hmon():
 	def __init__(self):
 		self.stats = [random.randrange(0,32),random.randrange(0,32),random.randrange(0,32),random.randrange(0,32),random.randrange(0,32),random.randrange(0,32)]
 		self.status = "normal"
+		self.hp
 
 	def changeHealth(self):
 		pass
@@ -57,14 +58,15 @@ class player():
 		self.walk += 1
 
 class trainer():
-	def __init__(self,file,portrait,dialogue,mon):
+	def __init__(self,name,file,portrait,dialogue,mon):
+		trainer.name = name
 		self.file = file
 		self.portrait = portrait
 		self.dialogue = dialogue
 		self.mon = mon
 
 #instantiating the trainer objects
-al_vos = trainer(None,pygame.image.load('art/character_portraits/al_vos.png'),"Hello, I'm Al Vos! Welcome to Hinman college!",())
+al_vos = trainer("Al Vos",None,pygame.image.load('art/character_portraits/al_vos.png'),"Hello, I'm Al Vos! Welcome to Hinman college! What the fuck did you just fucking say about me, you little bitch? I’ll have you know I graduated top of my class in the Navy Seals, and I’ve been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills. I am trained in gorilla warfare and I’m the top sniper in the entire US armed forces. You are nothing to me but just another target. I will wipe you the fuck out with precision the likes of which has never been seen before on this Earth, mark my fucking words. You think you can get away with saying that shit to me over the Internet? Think again, fucker. As we speak I am contacting my secret network of spies across the USA and your IP is being traced right now so you better prepare for the storm, maggot. The storm that wipes out the pathetic little thing you call your life. You’re fucking dead, kid. I can be anywhere, anytime, and I can kill you in over seven hundred ways, and that’s just with my bare hands. Not only am I extensively trained in unarmed combat, but I have access to the entire arsenal of the United States Marine Corps and I will use it to its full extent to wipe your miserable ass off the face of the continent, you little shit. If only you could have known what unholy retribution your little “clever” comment was about to bring down upon you, maybe you would have held your fucking tongue. But you couldn’t, you didn’t, and now you’re paying the price, you goddamn idiot. I will shit fury all over you and you will drown in it. You’re fucking dead, kiddo.",())
 		
 def battle(p1,enemy):
 	pass
@@ -72,17 +74,43 @@ def battle(p1,enemy):
 def dialogue(win,trainer):
 	drawTextBox(win,trainer)
 	font = pygame.font.SysFont("Courier New",20)
-
+	index = 0
+	text_y = 360
+	while index < len(trainer.dialogue):
+		line = trainer.dialogue[index:index + 41]
+		index += 40
+		print(line)
+		while line[-1] != " ":
+			line = line[:-1]
+			index -= 1
+			print(line)
+		text_x = 30
+		for i in line:
+			win.blit(font.render(i, False,(0,0,0)), (text_x,text_y))
+			time.sleep(.05)
+			pygame.display.update()
+			text_x += 10
+		text_y += 20
+		if text_y > 420:
+			drawTextBox(win,trainer)
+			text_y = 360
+	"""
 	for i in range(len(trainer.dialogue)):
-		win.blit(font.render(trainer.dialogue[i], False,(0,0,0)), (30 + (i*10),400))
+		win.blit(font.render(trainer.dialogue[i], False,(0,0,0)), (text_x,text_y))
 		time.sleep(.03)
 		pygame.display.update()
+		text_x += 10
+		if text_x % 400 == 0:
+			text_x = 30
+			text_y += 20
+	"""
 
 def drawTextBox(win,trainer):
 	pygame.draw.rect(win,(20,20,80),(20,HEIGHT-150,600,130), 10)
 	pygame.draw.rect(win,(220,220,220),(25,HEIGHT-145,590,120))
 	pygame.draw.rect(win,(20,20,80),(20,HEIGHT-150,470,130), 10)
 	win.blit(trainer.portrait,(495,335))
+	win.blit(font.render(trainer.name, False,(0,0,0)), (30,340))
 
 def encounter():
 	pass
@@ -110,7 +138,7 @@ def locationChange(loc,p1,l):
 		musicChange(loc)
 	return l
 
-def move(win,loc,p1):
+def playerInput(win,loc,p1):
 	keys = pygame.key.get_pressed()
 	offset = (p1.x - loc.x,p1.y - loc.y)
 	result = loc.mask.overlap(p1.mask,offset)
@@ -185,7 +213,7 @@ def main():
 			if event.type == pygame.QUIT:
 				run = False
 
-		move(win,locs[loc],p1)
+		playerInput(win,locs[loc],p1)
 		loc = locationChange(locs[loc],p1,loc)
 		redraw(win,locs[loc],p1)
 	pygame.quit()
