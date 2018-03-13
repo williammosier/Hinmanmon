@@ -62,16 +62,25 @@ class trainer():
 		trainer.name = name
 		self.file = file
 		self.portrait = portrait
+<<<<<<< HEAD
 		self.dialogue = dialogue + " "
 		self.mon = mon
 
 #instantiating the trainer objects
 al_vos = trainer("Al Vos",None,pygame.image.load('art/character_portraits/al_vos.png'),"Hello, I'm Al Vos! Welcome to Hinman college!",())
+=======
+		self.dialogue = dialogue
+		self.mon = mon
+
+#instantiating the trainer objects
+al_vos = trainer("Al Vos",None,pygame.image.load('art/character_portraits/al_vos.png'),"Hello, I'm Al Vos! Welcome to Hinman college! What the fuck did you just fucking say about me, you little bitch? I’ll have you know I graduated top of my class in the Navy Seals, and I’ve been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills. I am trained in gorilla warfare and I’m the top sniper in the entire US armed forces. You are nothing to me but just another target. I will wipe you the fuck out with precision the likes of which has never been seen before on this Earth, mark my fucking words. You think you can get away with saying that shit to me over the Internet? Think again, fucker. As we speak I am contacting my secret network of spies across the USA and your IP is being traced right now so you better prepare for the storm, maggot. The storm that wipes out the pathetic little thing you call your life. You’re fucking dead, kid. I can be anywhere, anytime, and I can kill you in over seven hundred ways, and that’s just with my bare hands. Not only am I extensively trained in unarmed combat, but I have access to the entire arsenal of the United States Marine Corps and I will use it to its full extent to wipe your miserable ass off the face of the continent, you little shit. If only you could have known what unholy retribution your little “clever” comment was about to bring down upon you, maybe you would have held your fucking tongue. But you couldn’t, you didn’t, and now you’re paying the price, you goddamn idiot. I will shit fury all over you and you will drown in it. You’re fucking dead, kiddo.",())
+>>>>>>> refs/remotes/origin/master
 		
 def battle(p1,enemy):
 	pass
 
 def dialogue(win,trainer):
+<<<<<<< HEAD
 	font = pygame.font.SysFont("Courier New",20)
 	drawTextBox(win,font,trainer)
 	time.sleep(.2)
@@ -81,6 +90,16 @@ def dialogue(win,trainer):
 		line = trainer.dialogue[index:index + 41]
 		index += 41
 		print(line[-1])
+=======
+	drawTextBox(win,trainer)
+	font = pygame.font.SysFont("Courier New",20)
+	index = 0
+	text_y = 360
+	while index < len(trainer.dialogue):
+		line = trainer.dialogue[index:index + 41]
+		index += 40
+		print(line)
+>>>>>>> refs/remotes/origin/master
 		while line[-1] != " ":
 			line = line[:-1]
 			index -= 1
@@ -92,12 +111,18 @@ def dialogue(win,trainer):
 			pygame.display.update()
 			text_x += 10
 		text_y += 20
+<<<<<<< HEAD
 		if text_y > 430:
 			time.sleep(.5) #ASK FOR USER INPUT BEFORE ADVANCING TO NEXT PANEL
 			drawTextBox(win,font,trainer)
 			text_y = 370
 	time.sleep(.5) #ASK FOR USER INPUT BEFORE ADVANCING TO NEXT PANEL
 	
+=======
+		if text_y > 420:
+			drawTextBox(win,trainer)
+			text_y = 360
+>>>>>>> refs/remotes/origin/master
 	"""
 	for i in range(len(trainer.dialogue)):
 		win.blit(font.render(trainer.dialogue[i], False,(0,0,0)), (text_x,text_y))
@@ -108,6 +133,7 @@ def dialogue(win,trainer):
 			text_x = 30
 			text_y += 20
 	"""
+<<<<<<< HEAD
 
 def drawTextBox(win,font,trainer):
 	pygame.draw.rect(win,(20,20,80),(20,HEIGHT-150,600,130), 10)
@@ -117,11 +143,22 @@ def drawTextBox(win,font,trainer):
 	win.blit(font.render(trainer.name, False,(0,0,0)), (30,340))
 	pygame.display.update()
 
+=======
+
+def drawTextBox(win,trainer):
+	pygame.draw.rect(win,(20,20,80),(20,HEIGHT-150,600,130), 10)
+	pygame.draw.rect(win,(220,220,220),(25,HEIGHT-145,590,120))
+	pygame.draw.rect(win,(20,20,80),(20,HEIGHT-150,470,130), 10)
+	win.blit(trainer.portrait,(495,335))
+	win.blit(font.render(trainer.name, False,(0,0,0)), (30,340))
+
+>>>>>>> refs/remotes/origin/master
 def encounter():
 	pass
 
 def interact(win):
 	dialogue(win,al_vos)
+<<<<<<< HEAD
 
 def isNotCollided(loc,p1mask,p1x,p1y):
 	offset = (p1x - loc.x,p1y - loc.y)
@@ -153,6 +190,39 @@ def playerInput(win,loc,p1):
 	else:
 		pygame.display.set_caption("NO HIT")
 
+=======
+
+def isNotCollided(loc,p1mask,p1x,p1y):
+	offset = (p1x - loc.x,p1y - loc.y)
+	return not(loc.mask.overlap(p1mask,offset))
+
+
+def locationChange(loc,p1,l):
+	offset = (p1.x - loc.x,p1.y - loc.y)
+	result = (loc.transfer.overlap(p1.mask,offset))
+	if l == 0 and p1.x > 500 and result:
+		l = 1
+		p1.x = 100
+		p1.y = 200
+		musicChange(loc)
+	if l == 1 and p1.y > 300 and result:
+		l = 0
+		p1.x = 2400
+		p1.y = -1200
+		musicChange(loc)
+	return l
+
+def playerInput(win,loc,p1):
+	keys = pygame.key.get_pressed()
+	offset = (p1.x - loc.x,p1.y - loc.y)
+	result = loc.mask.overlap(p1.mask,offset)
+
+	if isNotCollided(loc,p1.mask,p1.x,p1.y):
+		pygame.display.set_caption("HIT")
+	else:
+		pygame.display.set_caption("NO HIT")
+
+>>>>>>> refs/remotes/origin/master
 	if keys[pygame.K_a] and p1.x > 0 and isNotCollided(loc,p1.mask,p1.x-5,p1.y):
 		if loc.x == 0 or p1.x >= WIDTH//2 - p1.width//2:
 			p1.x -= p1.velocity
