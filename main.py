@@ -1,5 +1,6 @@
 import pygame
 import random
+import time
 
 pygame.init()
 
@@ -48,8 +49,9 @@ class player():
 		self.walk += 1
 
 class trainer():
-	def __init__(self,file,dialog,mon):
+	def __init__(self,file,portrait,dialog,mon):
 		self.file = file
+		self.portrait = portrait
 		self.dialog = dialog
 		self.mon = mon
 		
@@ -119,14 +121,36 @@ def musicChange():
 def pauseMenu():
 	pass
 
+def drawDialogueBox(win):
+	portrait = pygame.image.load('art/character_portraits/al_vos.png')
+
+	pygame.draw.rect(win,(20,20,80),(20,HEIGHT-150,600,130), 10)
+	pygame.draw.rect(win,(220,220,220),(25,HEIGHT-145,590,120))
+	pygame.draw.rect(win,(20,20,80),(20,HEIGHT-150,470,130), 10)
+	win.blit(portrait,(495,335))
+
+def writeDialogue(win,string):
+	black = (0,0,0)
+	font = pygame.font.SysFont("Courier New",20)
+
+	text = ""
+	for i in range(len(string)):
+		text = font.render(string[i], False, black)
+		win.blit(text, (30 + (i*10),400))
+		time.sleep(.03)
+		pygame.display.update()
+
 def redraw(win,loc,p1):
 	win.blit(loc.file,(loc.x,loc.y))
 	p1.draw(win)
+	drawDialogueBox(win)
+	writeDialogue(win, "All the world's a stage and we are merely players")
 	pygame.display.update()
 
+
 #defines window dimensions
-WIDTH = 600
-HEIGHT = 400
+WIDTH = 640
+HEIGHT = 480
 
 #sets the possible moves for Hinmanmon
 MOVES = ()
