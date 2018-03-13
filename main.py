@@ -2,12 +2,18 @@ import pygame
 import random
 import time
 
-pygame.init()
+#defines window dimensions
+WIDTH = 640
+HEIGHT = 480
+
+#sets the possible moves for Hinmanmon
+MOVES = ()
 
 class Hmon():
 	def __init__(self):
 		self.stats = [random.randrange(0,32),random.randrange(0,32),random.randrange(0,32),random.randrange(0,32),random.randrange(0,32),random.randrange(0,32)]
 		self.status = "normal"
+		self.hp
 
 	def changeHealth(self):
 		pass
@@ -22,13 +28,16 @@ class baldman(Hmon):
 		self.type = "Harpur"
 
 class location():
-	def __init__(self,file,mask,x,y,width,height):
+	def __init__(self,file,mask,transfer,music,x,y,width,height):
 		self.file = file
 		self.x = x
 		self.y = y
 		self.width = width
 		self.height = height
 		self.mask = pygame.mask.from_surface(mask)
+		self.transfer = pygame.mask.from_surface(transfer)
+		self.encounter = None
+		self.music = music
 
 class player():
 	def __init__(self,file,x,y):
@@ -49,113 +58,142 @@ class player():
 		self.walk += 1
 
 class trainer():
-	def __init__(self,file,portrait,dialog,mon):
+	def __init__(self,name,file,portrait,dialogue,mon):
+		trainer.name = name
 		self.file = file
 		self.portrait = portrait
-		self.dialog = dialog
+		self.dialogue = dialogue + " "
 		self.mon = mon
+
+#instantiating the trainer objects
+al_vos = trainer("Al Vos",None,pygame.image.load('art/character_portraits/al_vos.png'),"Hello, I'm Al Vos! Welcome to Hinman college!",())
 		
 def battle(p1,enemy):
 	pass
 
-def isEncounter():
+def dialogue(win,trainer):
+	font = pygame.font.SysFont("Courier New",20)
+	drawTextBox(win,font,trainer)
+	time.sleep(.2)
+	index = 0
+	text_y = 370
+	while index < len(trainer.dialogue):
+		line = trainer.dialogue[index:index + 41]
+		index += 41
+		print(line[-1])
+		while line[-1] != " ":
+			line = line[:-1]
+			index -= 1
+			print(line)
+		text_x = 30
+		for i in line:
+			win.blit(font.render(i, False,(0,0,0)), (text_x,text_y))
+			time.sleep(.05)
+			pygame.display.update()
+			text_x += 10
+		text_y += 20
+		if text_y > 430:
+			time.sleep(.5) #ASK FOR USER INPUT BEFORE ADVANCING TO NEXT PANEL
+			drawTextBox(win,font,trainer)
+			text_y = 370
+	time.sleep(.5) #ASK FOR USER INPUT BEFORE ADVANCING TO NEXT PANEL
+	
+	"""
+	for i in range(len(trainer.dialogue)):
+		win.blit(font.render(trainer.dialogue[i], False,(0,0,0)), (text_x,text_y))
+		time.sleep(.03)
+		pygame.display.update()
+		text_x += 10
+		if text_x % 400 == 0:
+			text_x = 30
+			text_y += 20
+	"""
+
+def drawTextBox(win,font,trainer):
+	pygame.draw.rect(win,(20,20,80),(20,HEIGHT-150,600,130), 10)
+	pygame.draw.rect(win,(220,220,220),(25,HEIGHT-145,590,120))
+	pygame.draw.rect(win,(20,20,80),(20,HEIGHT-150,470,130), 10)
+	win.blit(trainer.portrait,(495,335))
+	win.blit(font.render(trainer.name, False,(0,0,0)), (30,340))
+	pygame.display.update()
+
+def encounter():
 	pass
 
-def isNotCollided():
-	pass
+def interact(win):
+	dialogue(win,al_vos)
 
-def locationChange():
-	musicChange()
+def isNotCollided(loc,p1mask,p1x,p1y):
+	offset = (p1x - loc.x,p1y - loc.y)
+	return not(loc.mask.overlap(p1mask,offset))
 
-def moveLeft(loc,p1,keys):
-	if keys[pygame.K_LEFT] and p1.x > 0:
-		if loc.x == 0 or p1.x >= WIDTH//2 - p1.width//2:
-			p1.x -= p1.velocity
-		else:
-			loc.x += p1.velocity
 
-def moveRight(loc,p1,keys):
-	if keys[pygame.K_RIGHT] and p1.x < WIDTH + p1.width:
-		if loc.x == -loc.width + WIDTH or p1.x < WIDTH//2 - p1.width//2:
-			p1.x += p1.velocity
-		else:
-			loc.x -= p1.velocity
+def locationChange(loc,p1,l):
+	offset = (p1.x - loc.x,p1.y - loc.y)
+	result = (loc.transfer.overlap(p1.mask,offset))
+	if l == 0 and p1.x > 500 and result:
+		l = 1
+		p1.x = 100
+		p1.y = 200
+		musicChange(loc)
+	if l == 1 and p1.y > 300 and result:
+		l = 0
+		p1.x = 2400
+		p1.y = -1200
+		musicChange(loc)
+	return l
 
-def moveUp(loc,p1,keys):
-	if keys[pygame.K_UP] and p1.y > 0:
-		if loc.y == 0 or p1.y >= HEIGHT//2 - p1.height//2:
-			p1.y -= p1.velocity
-		else:
-			loc.y += p1.velocity
-
-def moveDown(loc,p1,keys):
-	if keys[pygame.K_DOWN] and p1.y < HEIGHT - p1.height:
-		if loc.y == -loc.height + HEIGHT or p1.y < HEIGHT//2 - p1.height//2:
-			p1.y += p1.velocity
-		else:
-			loc.y -= p1.velocity
-
-def isMoving(p1,keys):
-	if (not(keys[pygame.K_LEFT]) and not(keys[pygame.K_RIGHT]) and not(keys[pygame.K_UP]) and not(keys[pygame.K_DOWN])) or (keys[pygame.K_LEFT] and keys[pygame.K_RIGHT]) or (keys[pygame.K_UP] and keys[pygame.K_DOWN]):
-		p1.walk = 0
-
-def move(loc,p1):
+def playerInput(win,loc,p1):
 	keys = pygame.key.get_pressed()
 	offset = (p1.x - loc.x,p1.y - loc.y)
 	result = loc.mask.overlap(p1.mask,offset)
 
-	if result:
+	if isNotCollided(loc,p1.mask,p1.x,p1.y):
 		pygame.display.set_caption("HIT")
 	else:
 		pygame.display.set_caption("NO HIT")
 
-	moveLeft(loc,p1,keys)
-	moveRight(loc,p1,keys)
-	moveUp(loc,p1,keys)
-	moveDown(loc,p1,keys)
-	isMoving(p1,keys)
+	if keys[pygame.K_a] and p1.x > 0 and isNotCollided(loc,p1.mask,p1.x-5,p1.y):
+		if loc.x == 0 or p1.x >= WIDTH//2 - p1.width//2:
+			p1.x -= p1.velocity
+		else:
+			loc.x += p1.velocity
+	if keys[pygame.K_d] and p1.x < WIDTH + p1.width and isNotCollided(loc,p1.mask,p1.x+5,p1.y):
+		if loc.x == -loc.width + WIDTH or p1.x < WIDTH//2 - p1.width//2:
+			p1.x += p1.velocity
+		else:
+			loc.x -= p1.velocity
+	if keys[pygame.K_w] and p1.y > 0 and isNotCollided(loc,p1.mask,p1.x,p1.y-5):
+		if loc.y == 0 or p1.y >= HEIGHT//2 - p1.height//2:
+			p1.y -= p1.velocity
+		else:
+			loc.y += p1.velocity
+	if keys[pygame.K_s] and p1.y < HEIGHT - p1.height and isNotCollided(loc,p1.mask,p1.x,p1.y+5):
+		if loc.y == -loc.height + HEIGHT or p1.y < HEIGHT//2 - p1.height//2:
+			p1.y += p1.velocity
+		else:
+			loc.y -= p1.velocity
+	if not(keys[pygame.K_a]) and not(keys[pygame.K_d]) and not(keys[pygame.K_w]) and not(keys[pygame.K_s]):
+		p1.walk = 0
 
-def musicChange():
-	pass
+	if keys[pygame.K_e]:
+		interact(win)
+
+def musicChange(loc):
+	pygame.mixer.music.load(loc.music)
+	pygame.mixer.music.play()
 
 def pauseMenu():
 	pass
 
-def drawDialogueBox(win):
-	portrait = pygame.image.load('art/character_portraits/al_vos.png')
-
-	pygame.draw.rect(win,(20,20,80),(20,HEIGHT-150,600,130), 10)
-	pygame.draw.rect(win,(220,220,220),(25,HEIGHT-145,590,120))
-	pygame.draw.rect(win,(20,20,80),(20,HEIGHT-150,470,130), 10)
-	win.blit(portrait,(495,335))
-
-def writeDialogue(win,string):
-	black = (0,0,0)
-	font = pygame.font.SysFont("Courier New",20)
-
-	text = ""
-	for i in range(len(string)):
-		text = font.render(string[i], False, black)
-		win.blit(text, (30 + (i*10),400))
-		time.sleep(.03)
-		pygame.display.update()
-
 def redraw(win,loc,p1):
 	win.blit(loc.file,(loc.x,loc.y))
 	p1.draw(win)
-	drawDialogueBox(win)
-	writeDialogue(win, "All the world's a stage and we are merely players")
 	pygame.display.update()
 
-
-#defines window dimensions
-WIDTH = 640
-HEIGHT = 480
-
-#sets the possible moves for Hinmanmon
-MOVES = ()
-
 def main():
+	pygame.init()
+	pygame.mixer.init()
 	run = True
 
 	#sets up the window
@@ -163,13 +201,14 @@ def main():
 	pygame.display.set_caption("Hinmanmon")
 
 	#instantiating the player object
-	char = [pygame.image.load('art/sprites/player_male_sprite_standing.png'),pygame.image.load('art/sprites/player_male_sprite_leftstep.png'),pygame.image.load('art/sprites/player_male_sprite_rightstep.png')]
+	char = (pygame.image.load('art/sprites/player_male_sprite_standing.png'),pygame.image.load('art/sprites/player_male_sprite_leftstep.png'),pygame.image.load('art/sprites/player_male_sprite_rightstep.png'))
 	p1 = player(char,WIDTH//2 - 20,HEIGHT//2 - 20)
 	pmask = pygame.image.load('art/sprites/player_mask.png').convert_alpha()
 	p1.mask = pygame.mask.from_surface(pmask)
 
 	#instantiating the location objects and setting current location
-	locs = [location(pygame.image.load('art/environment/hinman_college.png'),pygame.image.load('art/environment/hinman_college_mask.png').convert_alpha(),-200,-500,3200,3200)]
+	locs = (location(pygame.image.load('art/environment/hinman_college.png'),pygame.image.load('art/environment/hinman_college_mask.png').convert_alpha(),pygame.image.load('art/environment/hinman_college_loadzones.png'),'music/death.ogg',-1900,-1200,2600,2600),\
+		location(pygame.image.load('art/environment/success_center.png'),pygame.image.load('art/environment/success_center_mask.png').convert_alpha(),pygame.image.load('art/environment/success_center_loadzones.png'),'music/reslife.ogg',0,0,600,400))
 	loc = 0
 
 	while run:
@@ -179,7 +218,8 @@ def main():
 			if event.type == pygame.QUIT:
 				run = False
 
-		move(locs[loc],p1)
+		playerInput(win,locs[loc],p1)
+		loc = locationChange(locs[loc],p1,loc)
 		redraw(win,locs[loc],p1)
 	pygame.quit()
 main()
