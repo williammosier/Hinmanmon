@@ -69,7 +69,7 @@ def locationChange():
 
 def moveLeft(loc,p1,keys):
 	if keys[pygame.K_LEFT] and p1.x > 0:
-		if loc.x == 0 or p1.x >= WIDTH//2 + p1.width//2:
+		if loc.x == 0 or p1.x >= WIDTH//2 - p1.width//2:
 			p1.x -= p1.velocity
 		else:
 			loc.x += p1.velocity
@@ -83,7 +83,7 @@ def moveRight(loc,p1,keys):
 
 def moveUp(loc,p1,keys):
 	if keys[pygame.K_UP] and p1.y > 0:
-		if loc.y == 0 or p1.y >= HEIGHT//2 + p1.height//2:
+		if loc.y == 0 or p1.y >= HEIGHT//2 - p1.height//2:
 			p1.y -= p1.velocity
 		else:
 			loc.y += p1.velocity
