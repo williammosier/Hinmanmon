@@ -114,6 +114,26 @@ def drawTextBox(win,font,trainer):
 def encounter():
 	pass
 
+def fadeIn(win,loc,p1):
+	image = pygame.image.load("art/environment/fade.png")
+	for i in range(0,225,10):
+		win.blit(loc.file,(loc.x,loc.y))
+		win.blit(p1.file[0],(p1.x,p1.y))
+		image.set_alpha(255-i)
+		win.blit(image,(0,0))
+		pygame.display.flip()
+
+def fadeOut(win):
+	image = pygame.image.load("art/environment/fade.png")
+	for i in range(225):
+		image.set_alpha(i)
+		win.blit(image,(0,0))
+		pygame.display.flip()
+		pygame.time.delay(1)
+
+def hasAccessTo(p1):
+	pass
+
 def interact(win):
 	dialogue(win,al_vos)
 
@@ -121,19 +141,23 @@ def isNotCollided(loc,p1mask,p1x,p1y):
 	offset = (p1x - loc.x,p1y - loc.y)
 	return not(loc.mask.overlap(p1mask,offset))
 
-def locationChange(locs,p1,loc):
+def locationChange(win,locs,p1,loc):
 	offset = (p1.x - locs[loc].x,p1.y - locs[loc].y)
 	result = (locs[loc].transfer.overlap(p1.mask,offset))
-	if loc == 0 and p1.x > 500 and result:
+	if result: #and hasAccessTo()
+		fadeOut(win)
+	if loc == 0 and p1.x > 500 and result: #Abstract to subfunction that takes loadzone coords and location as parameters
 		loc = 1
 		p1.x = 90
 		p1.y = 300
 		musicChange(locs[loc])
+		fadeIn(win,locs[loc],p1)
 	if loc == 1 and p1.y > 300 and result:
 		loc = 0
 		p1.x = 560
 		p1.y = 220
 		musicChange(locs[loc])
+		fadeIn(win,locs[loc],p1)
 	return loc
 
 def playerInput(win,loc,p1):
@@ -210,9 +234,8 @@ def main():
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				run = False
-
 		playerInput(win,locs[loc],p1)
-		loc = locationChange(locs,p1,loc)
 		redraw(win,locs[loc],p1)
+		loc = locationChange(win,locs,p1,loc)
 	pygame.quit()
 main()
