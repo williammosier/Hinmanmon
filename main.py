@@ -1,3 +1,4 @@
+
 import pygame
 import random
 import time
@@ -66,7 +67,7 @@ class trainer():
 		self.mon = mon
 
 #instantiating the trainer objects
-al_vos = trainer("Al Vos",None,pygame.image.load('art/character_portraits/al_vos.png'),"Hello, I'm Al Vos! Welcome to Hinman college! What the fuck did you just fucking say about me, you little bitch? I’ll have you know I graduated top of my class in the Navy Seals. XXX_ALVOS_XXX",())
+al_vos = trainer("Al Vos",None,pygame.image.load('art/character_portraits/al_vos.png'),"Hello, I'm Al Vos! Welcome to Hinman college! What the fuck did you just fucking say about me, you little bitch? I’ll have you know I graduated top of my class in the Navy Seals, and I’ve been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills.",())
 		
 def battle(p1,enemy):
 	pass
@@ -81,22 +82,28 @@ def dialogue(win,trainer):
 		line = trainer.dialogue[index:index + 46]
 		index += 46
 		print(line)
+		text_sound = pygame.mixer.Sound('sound/sfx/talk.wav')
 		while line[-1] != " ":
 			line = line[:-1]
 			index -= 1
 			print(line)
 		text_x = 30
+		pygame.mixer.Sound.play(text_sound, -1)
 		for i in line:
 			win.blit(font.render(i, False,(0,0,0)), (text_x,text_y))
-			time.sleep(.05)
+			time.sleep(.03)
 			pygame.display.update()
 			text_x += 10
 		text_y += 20
+		pygame.mixer.Sound.stop(text_sound)
 		if text_y > 430 and index < len(trainer.dialogue):
-			time.sleep(.5)
+			time.sleep(.5) #ASK FOR USER FOR INPUT TO CONTINUE
 			drawTextBox(win,font,trainer)
 			text_y = 370
-	time.sleep(.5)
+		
+			
+	time.sleep(.5) #ASK FOR USER FOR INPUT TO CONTINUE
+
 	"""
 	for i in range(len(trainer.dialogue)):
 		win.blit(font.render(trainer.dialogue[i], False,(0,0,0)), (text_x,text_y))
@@ -146,12 +153,12 @@ def playerInput(win,loc,p1):
 	keys = pygame.key.get_pressed()
 	offset = (p1.x - loc.x,p1.y - loc.y)
 	result = loc.mask.overlap(p1.mask,offset)
-
+	
 	if isNotCollided(loc,p1.mask,p1.x,p1.y):
 		pygame.display.set_caption("HIT")
 	else:
 		pygame.display.set_caption("NO HIT")
-
+	
 	if keys[pygame.K_a] and p1.x > 0 and isNotCollided(loc,p1.mask,p1.x-5,p1.y):
 		if loc.x == 0 or p1.x >= WIDTH//2 - p1.width//2:
 			p1.x -= p1.velocity
@@ -180,7 +187,7 @@ def playerInput(win,loc,p1):
 
 def musicChange(loc):
 	pygame.mixer.music.load(loc.music)
-	pygame.mixer.music.play()
+	pygame.mixer.music.play(-1)
 
 def pauseMenu():
 	pass
@@ -206,8 +213,8 @@ def main():
 	p1.mask = pygame.mask.from_surface(pmask)
 
 	#instantiating the location objects and setting current location
-	locs = (location(pygame.image.load('art/environment/hinman_college.png'),pygame.image.load('art/environment/hinman_college_mask.png').convert_alpha(),pygame.image.load('art/environment/hinman_college_loadzones.png'),'music/death.ogg',-1900,-1200,2600,2600),\
-		location(pygame.image.load('art/environment/success_center.png'),pygame.image.load('art/environment/success_center_mask.png').convert_alpha(),pygame.image.load('art/environment/success_center_loadzones.png'),'music/reslife.ogg',0,0,600,400))
+	locs = (location(pygame.image.load('art/environment/hinman_college.png'),pygame.image.load('art/environment/hinman_college_mask.png').convert_alpha(),pygame.image.load('art/environment/hinman_college_loadzones.png'),'sound/music/death.ogg',-1900,-1200,2600,2600),\
+		location(pygame.image.load('art/environment/success_center.png'),pygame.image.load('art/environment/success_center_mask.png').convert_alpha(),pygame.image.load('art/environment/success_center_loadzones.png'),'sound/music/reslife.ogg',0,0,640,480))
 	loc = 0
 
 	while run:
