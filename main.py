@@ -100,20 +100,8 @@ def dialogue(win,trainer):
 			time.sleep(.5) #ASK FOR USER FOR INPUT TO CONTINUE
 			drawTextBox(win,font,trainer)
 			text_y = 370
-		
 			
 	time.sleep(.5) #ASK FOR USER FOR INPUT TO CONTINUE
-
-	"""
-	for i in range(len(trainer.dialogue)):
-		win.blit(font.render(trainer.dialogue[i], False,(0,0,0)), (text_x,text_y))
-		time.sleep(.03)
-		pygame.display.update()
-		text_x += 10
-		if text_x % 400 == 0:
-			text_x = 30
-			text_y += 20
-	"""
 
 def drawTextBox(win,font,trainer):
 	pygame.draw.rect(win,(20,20,80),(20,HEIGHT-150,600,130), 10)
@@ -133,21 +121,20 @@ def isNotCollided(loc,p1mask,p1x,p1y):
 	offset = (p1x - loc.x,p1y - loc.y)
 	return not(loc.mask.overlap(p1mask,offset))
 
-
-def locationChange(loc,p1,l):
-	offset = (p1.x - loc.x,p1.y - loc.y)
-	result = (loc.transfer.overlap(p1.mask,offset))
-	if l == 0 and p1.x > 500 and result:
-		l = 1
-		p1.x = 100
-		p1.y = 200
-		musicChange(loc)
-	if l == 1 and p1.y > 300 and result:
-		l = 0
-		p1.x = 2400
-		p1.y = -1200
-		musicChange(loc)
-	return l
+def locationChange(locs,p1,loc):
+	offset = (p1.x - locs[loc].x,p1.y - locs[loc].y)
+	result = (locs[loc].transfer.overlap(p1.mask,offset))
+	if loc == 0 and p1.x > 500 and result:
+		loc = 1
+		p1.x = 90
+		p1.y = 300
+		musicChange(locs[loc])
+	if loc == 1 and p1.y > 300 and result:
+		loc = 0
+		p1.x = 560
+		p1.y = 220
+		musicChange(locs[loc])
+	return loc
 
 def playerInput(win,loc,p1):
 	keys = pygame.key.get_pressed()
@@ -225,7 +212,7 @@ def main():
 				run = False
 
 		playerInput(win,locs[loc],p1)
-		loc = locationChange(locs[loc],p1,loc)
+		loc = locationChange(locs,p1,loc)
 		redraw(win,locs[loc],p1)
 	pygame.quit()
 main()
