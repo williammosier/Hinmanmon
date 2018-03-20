@@ -6,6 +6,17 @@ import time
 WIDTH = 640
 HEIGHT = 480
 
+#set several fixed color values for future reference
+COLORS = {
+	'black': (0,0,0),
+	'navy': (20,20,80),
+	'lightgray': (220,220,220),
+	'white': (255,255,255),
+	'pantone342': (64,112,96),
+	'darkgreen': (14,72,56),
+	'greygreen': (204,252,236)
+}
+
 #sets the possible moves for Hinmanmon
 MOVES = ()
 
@@ -23,7 +34,7 @@ class Hinman():
 		self.trainers = {"Al Vos": trainer("Al Vos",None,pygame.image.load('art/character_portraits/al_vos.png'),"Hello, I'm Al Vos! Welcome to Hinman college! What the fuck did you just fucking say about me, you little bitch? I’ll have you know I graduated top of my class in the Navy Seals, and I’ve been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills.",())}
 
 	def dialogue(self,trainer):
-		font = pygame.font.SysFont("Courier New",20)
+		font = pygame.font.Font("art/font/AnonymousPro-Bold.ttf",20)
 		self.drawTextBox(font,trainer)
 		time.sleep(.2)
 		index = 0
@@ -33,19 +44,17 @@ class Hinman():
 			next_tile = True
 			line = trainer.dialogue[index:index + 46]
 			index += 46
-			print(line)
 			text_sound = pygame.mixer.Sound('sound/sfx/talk.wav')
 			while line[-1] != " ":
 				line = line[:-1]
 				index -= 1
-				print(line)
 			text_x = 30
 			pygame.mixer.Sound.play(text_sound, -1)
 			for i in line:
 				for event in pygame.event.get():
 					if event.type == pygame.KEYDOWN:
 						text_speed = 0
-				self.window.blit(font.render(i, False,(0,0,0)), (text_x,text_y))
+				self.window.blit(font.render(i,False,COLORS['black']),(text_x,text_y))
 				time.sleep(text_speed)
 				pygame.display.update()
 				text_x += 10
@@ -66,11 +75,11 @@ class Hinman():
 					next_tile = False
 
 	def drawTextBox(self,font,trainer):
-		pygame.draw.rect(self.window,(20,20,80),(20,HEIGHT-150,600,130),10)
-		pygame.draw.rect(self.window,(220,220,220),(25,HEIGHT-145,590,120))
-		pygame.draw.rect(self.window,(20,20,80),(20,HEIGHT-150,470,130),10)
+		pygame.draw.rect(self.window,COLORS['darkgreen'],(20,HEIGHT-150,600,130),10)
+		pygame.draw.rect(self.window,COLORS['greygreen'],(25,HEIGHT-145,590,120))
+		pygame.draw.rect(self.window,COLORS['darkgreen'],(20,HEIGHT-150,470,130),10)
 		self.window.blit(trainer.portrait,(495,335))
-		self.window.blit(font.render(trainer.name,False,(0,0,0)),(30,340))
+		self.window.blit(font.render(trainer.name,False,COLORS['black']),(30,340))
 		pygame.display.update()
 
 	def fadeIn(self):
