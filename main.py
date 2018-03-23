@@ -25,6 +25,10 @@ class Hinman():
 		self.window = pygame.display.set_mode((WIDTH,HEIGHT))
 		self.locs = {"hinman college":location(pygame.image.load('art/environment/hinman_college.png'),pygame.image.load('art/environment/hinman_college_mask.png').convert_alpha(),pygame.image.load('art/environment/hinman_college_loadzones.png'),'sound/music/death.ogg',-1900,-1200,2600,2600)}
 		self.locs["success center"] = location(pygame.image.load('art/environment/success_center.png'),pygame.image.load('art/environment/success_center_mask.png').convert_alpha(),pygame.image.load('art/environment/success_center_loadzones.png'),'sound/music/reslife.ogg',0,0,640,480)
+		self.locs["hughes"] = location(pygame.image.load('art/environment/hughes.png'),pygame.image.load('art/environment/hughes_mask.png').convert_alpha(),pygame.image.load('art/environment/hughes_loadzones.png'),'sound/music/reslife.ogg',0,0,2000,500)
+		self.locs["cleveland"] = location(pygame.image.load('art/environment/cleveland.png'),pygame.image.load('art/environment/cleveland_mask.png').convert_alpha(),pygame.image.load('art/environment/cleveland_loadzones.png'),'sound/music/reslife.ogg',0,0,2000,500)
+		self.locs["lehman"] = location(pygame.image.load('art/environment/lehman.png'),pygame.image.load('art/environment/lehman_mask.png').convert_alpha(),pygame.image.load('art/environment/lehman_loadzones.png'),'sound/music/reslife.ogg',0,0,2000,500)
+		self.locs["roosevelt"] = location(pygame.image.load('art/environment/roosevelt.png'),pygame.image.load('art/environment/roosevelt_mask.png').convert_alpha(),pygame.image.load('art/environment/roosevelt_loadzones.png'),'sound/music/reslife.ogg',0,0,2000,500)
 		self.current_loc = "hinman college"
 		self.dialogues = None
 		char = (pygame.image.load('art/sprites/player_male_sprite_standing.png'),pygame.image.load('art/sprites/player_male_sprite_leftstep.png'),pygame.image.load('art/sprites/player_male_sprite_rightstep.png'))
@@ -104,7 +108,7 @@ class Hinman():
 
 	def isNotCollided(self,player_x,player_y):
 		offset = (player_x - self.locs[self.current_loc].x,player_y - self.locs[self.current_loc].y)
-		return not(self.locs[self.current_loc].mask.overlap(self.player.mask, offset))
+		return True #not(self.locs[self.current_loc].mask.overlap(self.player.mask, offset))
 
 	def locationChange(self):
 		offset = (self.player.x - self.locs[self.current_loc].x,self.player.y - self.locs[self.current_loc].y)
@@ -117,6 +121,46 @@ class Hinman():
 			self.player.y = 300
 			self.musicChange()
 			self.fadeIn()
+		# if self.current_loc == "hinman college" and self.locs[self.current_loc].y > -1000 and -1900 < self.locs[self.current_loc].x < -1800 and result:
+		# 	self.current_loc = "cleveland"
+		# 	self.player.x = 500
+		# 	self.player.y = 80
+		# 	self.locs[self.current_loc].x = -1300
+		# 	self.locs[self.current_loc].y = 0
+		# 	self.musicChange()
+		# 	self.fadeIn()
+		# if self.current_loc == "hinman college" and self.locs[self.current_loc].y > -1000 and -1900 < self.locs[self.current_loc].x < -1800 and result:
+		# 	self.current_loc = "hughes"
+		# 	self.player.x = 500
+		# 	self.player.y = 80
+		# 	self.locs[self.current_loc].x = -1300
+		# 	self.locs[self.current_loc].y = 0
+		# 	self.musicChange()
+		# 	self.fadeIn()
+		if self.current_loc == "hinman college" and -1150 < self.locs[self.current_loc].y < -1050 and -1250 < self.locs[self.current_loc].x < -1150 and result:
+			self.current_loc = "lehman"
+			self.player.x = 280
+			self.player.y = 300
+			self.locs[self.current_loc].x = 0
+			self.locs[self.current_loc].y = 0
+			self.musicChange()
+			self.fadeIn()
+		if self.current_loc == "hinman college" and -1000 < self.locs[self.current_loc].y and -1900 < self.locs[self.current_loc].x < -1800 and result:
+			self.current_loc = "lehman"
+			self.player.x = 500
+			self.player.y = 80
+			self.locs[self.current_loc].x = -1300
+			self.locs[self.current_loc].y = 0
+			self.musicChange()
+			self.fadeIn()
+		# if self.current_loc == "hinman college" and self.locs[self.current_loc].y > -1000 and -1900 < self.locs[self.current_loc].x < -1800 and result:
+		# 	self.current_loc = "roosevelt"
+		# 	self.player.x = 500
+		# 	self.player.y = 80
+		# 	self.locs[self.current_loc].x = -1300
+		# 	self.locs[self.current_loc].y = 0
+		# 	self.musicChange()
+		# 	self.fadeIn()
 		if self.current_loc == "success center" and self.player.y > 300 and result:
 			self.current_loc = "hinman college"
 			self.player.x = 560
@@ -133,9 +177,9 @@ class Hinman():
 		offset = (self.player.x - self.locs[self.current_loc].x,self.player.y - self.locs[self.current_loc].y)
 		result = self.locs[self.current_loc].mask.overlap(self.player.mask,offset)
 		if self.isNotCollided(self.player.x,self.player.y):
-			pygame.display.set_caption("HIT")
+			pygame.display.set_caption("HIT"+" locx: "+str(self.locs[self.current_loc].x)+" locy: "+str(self.locs[self.current_loc].y))
 		else:
-			pygame.display.set_caption("NO HIT")
+			pygame.display.set_caption("NO HIT"+" locx: "+str(self.locs[self.current_loc].x)+" locy: "+str(self.locs[self.current_loc].y))
 
 		if keys[pygame.K_a] and self.player.x > 0 and self.isNotCollided(self.player.x-5,self.player.y):
 			if self.locs[self.current_loc].x == 0 or self.player.x >= WIDTH//2 - self.player.width//2:
