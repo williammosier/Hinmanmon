@@ -333,16 +333,16 @@ class player():
 		self.y = y
 		self.width = 52
 		self.height = 34
-		self.velocity = 8
+		self.velocity = 2
 		self.direction = "forward"
 		self.mon = []
 		self.walk = 0
 		self.mask = pmask
 
 	def draw(self,win):
-		if self.walk > 11:
+		if self.walk > 39:
 			self.walk = 0
-		num = self.walk//3
+		num = self.walk//10
 		win.blit(self.sprites[self.direction][num],(self.x,self.y))
 		self.walk += 1
 
@@ -358,13 +358,14 @@ def main():
 	pygame.init()
 	pygame.mixer.init()
 	run = True
+	clock = pygame.time.Clock()
 
 	pygame.display.set_caption("Hinmanmon")
 
 	game = Hinman()
 
 	while run:
-		pygame.time.delay(50)
+		#pygame.time.delay(50)
 
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
@@ -373,5 +374,6 @@ def main():
 		game.playerInput()
 		game.redraw()
 		game.locationChange()
+		clock.tick(60)
 	pygame.quit()
 main()
