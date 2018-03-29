@@ -20,22 +20,81 @@ COLORS = {
 #sets the possible moves for Hinmanmon
 MOVES = ()
 
+class Controller:
+	pass
+#BASICALLY ANYTHING THAT'S A KEY PRESS SHOULD BE IN HERE AND WHEN THOSE CONDITIONS ARE MET IT SHOULD CALL THE VARIOUS METHODS OF THE HINMAN CLASS#
+
 class Hinman():
 	def __init__(self):
 		self.window = pygame.display.set_mode((WIDTH,HEIGHT))
-		self.locs = {"hinman college":location(pygame.image.load('art/environment/hinman_college.png'),pygame.image.load('art/environment/hinman_college_mask.png').convert_alpha(),pygame.image.load('art/environment/hinman_college_loadzones.png'),'sound/music/death.ogg',-1900,-1200,2600,2600)}
-		self.locs["success center"] = location(pygame.image.load('art/environment/success_center.png'),pygame.image.load('art/environment/success_center_mask.png').convert_alpha(),pygame.image.load('art/environment/success_center_loadzones.png'),'sound/music/reslife.ogg',0,0,640,480)
-		self.locs["hughes"] = location(pygame.image.load('art/environment/hughes.png'),pygame.image.load('art/environment/hughes_mask.png').convert_alpha(),pygame.image.load('art/environment/hughes_loadzones.png'),'sound/music/reslife.ogg',0,0,2000,500)
-		self.locs["cleveland"] = location(pygame.image.load('art/environment/cleveland.png'),pygame.image.load('art/environment/cleveland_mask.png').convert_alpha(),pygame.image.load('art/environment/cleveland_loadzones.png'),'sound/music/reslife.ogg',0,0,2000,500)
-		self.locs["lehman"] = location(pygame.image.load('art/environment/lehman.png'),pygame.image.load('art/environment/lehman_mask.png').convert_alpha(),pygame.image.load('art/environment/lehman_loadzones.png'),'sound/music/reslife.ogg',0,0,2000,500)
-		self.locs["roosevelt"] = location(pygame.image.load('art/environment/roosevelt.png'),pygame.image.load('art/environment/roosevelt_mask.png').convert_alpha(),pygame.image.load('art/environment/roosevelt_loadzones.png'),'sound/music/reslife.ogg',0,0,2000,500)
-		self.current_loc = "hinman college"
+		self.locs = {
+			"hinman college":\
+			location(pygame.image.load('art/environment/hinman_college.png'),\
+					pygame.image.load('art/environment/hinman_college_mask.png').convert_alpha(),\
+					pygame.image.load('art/environment/hinman_college_loadzones.png'),'sound/music/death.ogg',-1900,-1200,2600,2600),
+
+			"success center":\
+			location(pygame.image.load('art/environment/success_center.png'),\
+					pygame.image.load('art/environment/success_center_mask.png').convert_alpha(),\
+					pygame.image.load('art/environment/success_center_loadzones.png'),'sound/music/reslife.ogg',0,0,640,480),
+
+			"hughes":\
+			location(pygame.image.load('art/environment/hughes.png'),\
+					pygame.image.load('art/environment/hughes_mask.png').convert_alpha(),\
+					pygame.image.load('art/environment/hughes_loadzones.png'),'sound/music/reslife.ogg',0,0,2000,500),
+
+			"cleveland":\
+			location(pygame.image.load('art/environment/cleveland.png'),\
+					pygame.image.load('art/environment/cleveland_mask.png').convert_alpha(),\
+					pygame.image.load('art/environment/cleveland_loadzones.png'),'sound/music/reslife.ogg',0,0,2000,500),
+
+			"lehman":\
+			location(pygame.image.load('art/environment/lehman.png'),\
+					pygame.image.load('art/environment/lehman_mask.png').convert_alpha(),\
+					pygame.image.load('art/environment/lehman_loadzones.png'),'sound/music/reslife.ogg',0,0,2000,500),
+
+			"roosevelt":\
+			location(pygame.image.load('art/environment/roosevelt.png'),\
+					pygame.image.load('art/environment/roosevelt_mask.png').convert_alpha(),\
+					pygame.image.load('art/environment/roosevelt_loadzones.png'),'sound/music/reslife.ogg',0,0,2000,500)
+			}
+
+		char = {
+			"forward":\
+			(pygame.image.load('art/sprites/player/FS.png'),\
+			pygame.image.load('art/sprites/player/FL.png'),\
+			pygame.image.load('art/sprites/player/FS.png'),\
+			pygame.image.load('art/sprites/player/FR.png')),
+
+			"backward":\
+			(pygame.image.load('art/sprites/player/BS.png'),\
+			pygame.image.load('art/sprites/player/BL.png'),\
+			pygame.image.load('art/sprites/player/BS.png'),\
+			pygame.image.load('art/sprites/player/BR.png')),
+
+			"left":\
+			(pygame.image.load('art/sprites/player/LS.png'),\
+			pygame.image.load('art/sprites/player/LL.png'),\
+			pygame.image.load('art/sprites/player/LS.png'),\
+			pygame.image.load('art/sprites/player/LR.png')),
+
+			"right":\
+			(pygame.image.load('art/sprites/player/RS.png'),\
+			pygame.image.load('art/sprites/player/RL.png'),\
+			pygame.image.load('art/sprites/player/RS.png'),\
+			pygame.image.load('art/sprites/player/RR.png'))
+			}
+
+		pmask = pygame.image.load('art/sprites/player/mask.png').convert_alpha()
+		pmask = pygame.mask.from_surface(pmask)
+
+		self.current_loc = "success center"
 		self.dialogues = None
-		char = (pygame.image.load('art/sprites/player_male_sprite_standing.png'),pygame.image.load('art/sprites/player_male_sprite_leftstep.png'),pygame.image.load('art/sprites/player_male_sprite_rightstep.png'))
-		self.player = player(char,WIDTH//2 - 20,HEIGHT//2 - 20)
-		pmask = pygame.image.load('art/sprites/player_mask.png').convert_alpha()
-		self.player.mask = pygame.mask.from_surface(pmask)
-		self.trainers = {"Al Vos": trainer("Al Vos",None,pygame.image.load('art/character_portraits/al_vos.png'),"Hello, I'm Al Vos! Welcome to Hinman college! What the fuck did you just fucking say about me, you little bitch? I’ll have you know I graduated top of my class in the Navy Seals, and I’ve been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills.",())}
+		self.player = player(char,WIDTH//2 - 20,HEIGHT//2 - 20,pmask)
+		self.trainers = {
+			"Al Vos": trainer("Al Vos",None,pygame.image.load('art/character_portraits/al_vos.png'), "Hello, I'm Al Vos! Welcome to Hinman college! What the fuck did you just fucking say about me, you little bitch? I’ll have you know I graduated top of my class in the Navy Seals, and I’ve been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills.",())
+
+			}
 
 	def dialogue(self,trainer):
 		font = pygame.font.Font("art/font/AnonymousPro-Bold.ttf",20)
@@ -72,7 +131,6 @@ class Hinman():
 				self.drawTextBox(font,trainer)
 				text_speed = .03
 				text_y = 370
-				
 		while next_tile:
 			for event in pygame.event.get():
 				if event.type == pygame.KEYDOWN:
@@ -90,7 +148,7 @@ class Hinman():
 		image = pygame.image.load("art/environment/fade.png")
 		for i in range(0,225,10):
 			self.window.blit(self.locs[self.current_loc].file,(self.locs[self.current_loc].x,self.locs[self.current_loc].y))
-			self.window.blit(self.player.file[0],(self.player.x,self.player.y))
+			self.window.blit(self.player.sprites[self.player.direction][0],(self.player.x,self.player.y))
 			image.set_alpha(225-i)
 			self.window.blit(image,(0,0))
 			pygame.display.flip()
@@ -108,7 +166,8 @@ class Hinman():
 
 	def isNotCollided(self,player_x,player_y):
 		offset = (player_x - self.locs[self.current_loc].x,player_y - self.locs[self.current_loc].y)
-		return True #not(self.locs[self.current_loc].mask.overlap(self.player.mask, offset))
+		print(offset)
+		return not(self.locs[self.current_loc].mask.overlap(self.player.mask, offset))
 
 	def locationChange(self):
 		offset = (self.player.x - self.locs[self.current_loc].x,self.player.y - self.locs[self.current_loc].y)
@@ -168,44 +227,69 @@ class Hinman():
 			self.musicChange()
 			self.fadeIn()
 
+	##^#^#^#^#^#^#^#^#^## - MAKE THE ABOVE INTO A FUNCTION THAT TAKES IN THE LOCATIONS AND COORDINATES AS PARAMETERS - ##^#^#^#^#^#^#^#^#^##
+
 	def musicChange(self):
 		pygame.mixer.music.load(self.locs[self.current_loc].music)
 		pygame.mixer.music.play(-1)
+
+	def moveLeft(self):
+		if self.locs[self.current_loc].x == 0 or self.player.x >= WIDTH//2 - self.player.width//2:
+			self.player.x -= self.player.velocity
+		else:
+			self.locs[self.current_loc].x += self.player.velocity
+		self.player.direction = "left"
+
+	def moveRight(self):
+		if self.locs[self.current_loc].x == -self.locs[self.current_loc].width + WIDTH or self.player.x < WIDTH//2 - self.player.width//2:
+			self.player.x += self.player.velocity
+		else:
+			self.locs[self.current_loc].x -= self.player.velocity
+		self.player.direction = "right"
+
+	def moveUp(self):
+		if self.locs[self.current_loc].y == 0 or self.player.y >= HEIGHT//2 - self.player.height//2:
+			self.player.y -= self.player.velocity
+		else:
+			self.locs[self.current_loc].y += self.player.velocity
+		self.player.direction = "backward"
+
+	def moveDown(self):
+		if self.locs[self.current_loc].y == -self.locs[self.current_loc].height + HEIGHT or self.player.y < HEIGHT//2 - self.player.height//2:
+			self.player.y += self.player.velocity
+		else:
+			self.locs[self.current_loc].y -= self.player.velocity
+		self.player.direction = "forward"
 
 	def playerInput(self):
 		keys = pygame.key.get_pressed()
 		offset = (self.player.x - self.locs[self.current_loc].x,self.player.y - self.locs[self.current_loc].y)
 		result = self.locs[self.current_loc].mask.overlap(self.player.mask,offset)
+
 		if self.isNotCollided(self.player.x,self.player.y):
 			pygame.display.set_caption("HIT"+" locx: "+str(self.locs[self.current_loc].x)+" locy: "+str(self.locs[self.current_loc].y))
 		else:
 			pygame.display.set_caption("NO HIT"+" locx: "+str(self.locs[self.current_loc].x)+" locy: "+str(self.locs[self.current_loc].y))
 
 		if keys[pygame.K_a] and self.player.x > 0 and self.isNotCollided(self.player.x-5,self.player.y):
-			if self.locs[self.current_loc].x == 0 or self.player.x >= WIDTH//2 - self.player.width//2:
-				self.player.x -= self.player.velocity
-			else:
-				self.locs[self.current_loc].x += self.player.velocity
+			self.moveLeft()
 		if keys[pygame.K_d] and self.player.x < WIDTH + self.player.width and self.isNotCollided(self.player.x+5,self.player.y):
-			if self.locs[self.current_loc].x == -self.locs[self.current_loc].width + WIDTH or self.player.x < WIDTH//2 - self.player.width//2:
-				self.player.x += self.player.velocity
-			else:
-				self.locs[self.current_loc].x -= self.player.velocity
+			self.moveRight()
 		if keys[pygame.K_w] and self.player.y > 0 and self.isNotCollided(self.player.x,self.player.y-5):
-			if self.locs[self.current_loc].y == 0 or self.player.y >= HEIGHT//2 - self.player.height//2:
-				self.player.y -= self.player.velocity
-			else:
-				self.locs[self.current_loc].y += self.player.velocity
+			self.moveUp()
 		if keys[pygame.K_s] and self.player.y < HEIGHT - self.player.height and self.isNotCollided(self.player.x,self.player.y+5):
-			if self.locs[self.current_loc].y == -self.locs[self.current_loc].height + HEIGHT or self.player.y < HEIGHT//2 - self.player.height//2:
-				self.player.y += self.player.velocity
-			else:
-				self.locs[self.current_loc].y -= self.player.velocity
+			self.moveDown()
+
 		if not(keys[pygame.K_a]) and not(keys[pygame.K_d]) and not(keys[pygame.K_w]) and not(keys[pygame.K_s]):
 			self.player.walk = 0
 
 		if keys[pygame.K_e]:
 			self.interact()
+
+		if keys[pygame.K_b] and self.player.velocity == 5:
+			self.player.velocity *= 2
+		elif keys[pygame.K_b] and self.player.velocity == 10:
+			self.player.velocity /= 2
 
 	def redraw(self):
 		self.window.blit(self.locs[self.current_loc].file,(self.locs[self.current_loc].x,self.locs[self.current_loc].y))
@@ -243,21 +327,23 @@ class location():
 		self.music = music
 
 class player():
-	def __init__(self,file,x,y):
-		self.file = file
+	def __init__(self,sprites,x,y,pmask):
+		self.sprites = sprites
 		self.x = x
 		self.y = y
-		self.width = 40
-		self.height = 40
-		self.velocity = 5
+		self.width = 52
+		self.height = 34
+		self.velocity = 8
+		self.direction = "forward"
 		self.mon = []
 		self.walk = 0
-		self.mask = None
+		self.mask = pmask
 
 	def draw(self,win):
-		if self.walk > 2:
+		if self.walk > 11:
 			self.walk = 0
-		win.blit(self.file[self.walk],(self.x,self.y))
+		num = self.walk//3
+		win.blit(self.sprites[self.direction][num],(self.x,self.y))
 		self.walk += 1
 
 class trainer():
@@ -268,26 +354,6 @@ class trainer():
 		self.dialogue = dialogue + " "
 		self.mon = mon
 
-"""		
-def battle(p1,enemy):
-	pass
-<<<<<<< HEAD
-def encounter():
-	pass
-def hasAccessTo(p1):
-	pass
-=======
-
-def encounter():
-	pass
-
-def hasAccessTo(p1):
-	pass
-
->>>>>>> a94f0692120c9ba1a354b893086cd3c408d361f3
-def pauseMenu():
-	pass
-"""
 def main():
 	pygame.init()
 	pygame.mixer.init()
