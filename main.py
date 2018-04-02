@@ -174,56 +174,21 @@ class Hinman():
 		result = (self.locs[self.current_loc].transfer.overlap(self.player.mask,offset))
 		if result: #and hasAccessTo()
 			self.fadeOut()
-		if self.current_loc == "hinman college" and self.player.x > 500 and result:
-			self.current_loc = "success center"
-			self.player.x = 90
-			self.player.y = 300
-			self.musicChange()
-			self.fadeIn()
-		# if self.current_loc == "hinman college" and self.locs[self.current_loc].y > -1000 and -1900 < self.locs[self.current_loc].x < -1800 and result:
-		# 	self.current_loc = "cleveland"
-		# 	self.player.x = 500
-		# 	self.player.y = 80
-		# 	self.locs[self.current_loc].x = -1300
-		# 	self.locs[self.current_loc].y = 0
-		# 	self.musicChange()
-		# 	self.fadeIn()
-		# if self.current_loc == "hinman college" and self.locs[self.current_loc].y > -1000 and -1900 < self.locs[self.current_loc].x < -1800 and result:
-		# 	self.current_loc = "hughes"
-		# 	self.player.x = 500
-		# 	self.player.y = 80
-		# 	self.locs[self.current_loc].x = -1300
-		# 	self.locs[self.current_loc].y = 0
-		# 	self.musicChange()
-		# 	self.fadeIn()
-		if self.current_loc == "hinman college" and -1150 < self.locs[self.current_loc].y < -1050 and -1250 < self.locs[self.current_loc].x < -1150 and result:
-			self.current_loc = "lehman"
-			self.player.x = 280
-			self.player.y = 300
-			self.locs[self.current_loc].x = 0
-			self.locs[self.current_loc].y = 0
-			self.musicChange()
-			self.fadeIn()
-		if self.current_loc == "hinman college" and -1000 < self.locs[self.current_loc].y and -1900 < self.locs[self.current_loc].x < -1800 and result:
-			self.current_loc = "lehman"
-			self.player.x = 500
-			self.player.y = 80
-			self.locs[self.current_loc].x = -1300
-			self.locs[self.current_loc].y = 0
-			self.musicChange()
-			self.fadeIn()
-		# if self.current_loc == "hinman college" and self.locs[self.current_loc].y > -1000 and -1900 < self.locs[self.current_loc].x < -1800 and result:
-		# 	self.current_loc = "roosevelt"
-		# 	self.player.x = 500
-		# 	self.player.y = 80
-		# 	self.locs[self.current_loc].x = -1300
-		# 	self.locs[self.current_loc].y = 0
-		# 	self.musicChange()
-		# 	self.fadeIn()
-		if self.current_loc == "success center" and self.player.y > 300 and result:
-			self.current_loc = "hinman college"
-			self.player.x = 560
-			self.player.y = 220
+			
+		self.specificLoadzone(result,"hinman college","success center",90,300,slx=2400,sly=1300,suy=1500)
+		self.specificLoadzone(result,"success center","hinman college",560,215,sly=300)
+
+		self.specificLoadzone(result,"hinman college","lehman",280,300,lx=0,ly=0,slx=1400,sux=1600,sly=1200,suy=1400)
+		self.specificLoadzone(result,"hinman college","lehman",500,75,lx=-1300,slx=2000,sux=2200,suy=1200)
+		
+
+	def specificLoadzone(self,result,start,end,ex,ey,lx=None,ly=None,slx=0,sux=5000,sly=0,suy=5000):
+		if self.current_loc == start and slx < self.player.x - self.locs[self.current_loc].x < sux and sly < self.player.y - self.locs[self.current_loc].y < suy and result:
+			self.current_loc = end
+			self.player.x = ex
+			self.player.y = ey
+			self.locs[self.current_loc].x = lx or self.locs[self.current_loc].x
+			self.locs[self.current_loc].y = ly or self.locs[self.current_loc].y
 			self.musicChange()
 			self.fadeIn()
 
