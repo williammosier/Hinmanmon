@@ -96,6 +96,15 @@ class Hinman():
 
 			}
 
+	def battle(self,mon,trainer=None):
+		if trainer != None:
+			pass
+		print("encounter!!!!")
+		pygame.draw.rect(self.window,COLORS['white'],(0,0,640,480))
+		self.window.blit(self.player.sprites["forward"][0],(100,300))
+		self.window.blit(mon.portrait,(400,100))
+		time.sleep(.6)
+
 	def dialogue(self,trainer):
 		font = pygame.font.Font("art/font/AnonymousPro-Bold.ttf",20)
 		self.drawTextBox(font,trainer)
@@ -144,6 +153,14 @@ class Hinman():
 		self.window.blit(font.render(trainer.name,False,COLORS['black']),(30,340))
 		pygame.display.update()
 
+	def encounter(self):
+		if 650 < self.player.x - self.locs[self.current_loc].x < 1200 and 700 < self.player.y - self.locs[self.current_loc].y < 1250 and self.current_loc == "hinman college":
+			x = random.randrange(1,101)
+			if x > 99:
+				mon = baldman()
+				self.battle(mon)
+
+
 	def fadeIn(self):
 		image = pygame.image.load("art/environment/fade.png")
 		for i in range(0,225,10):
@@ -180,7 +197,8 @@ class Hinman():
 
 		self.specificLoadzone(result,"hinman college","lehman",280,300,lx=0,ly=0,slx=1400,sux=1600,sly=1200,suy=1400)
 		self.specificLoadzone(result,"hinman college","lehman",500,75,lx=-1300,slx=2000,sux=2200,suy=1200)
-		
+		self.specificLoadzone(result,"lehman","hinman college",250,250,lx=-1250,ly=-1150,sly=300)
+		self.specificLoadzone(result,"lehman","hinman college",250,250,lx=-1850,ly=-1050,slx=1800,suy=100)
 
 	def specificLoadzone(self,result,start,end,ex,ey,lx=None,ly=None,slx=0,sux=5000,sly=0,suy=5000):
 		if self.current_loc == start and slx < self.player.x - self.locs[self.current_loc].x < sux and sly < self.player.y - self.locs[self.current_loc].y < suy and result:
@@ -236,14 +254,14 @@ class Hinman():
 		else:
 			pygame.display.set_caption("NO HIT"+" locx: "+str(self.locs[self.current_loc].x)+" locy: "+str(self.locs[self.current_loc].y))
 
-		if keys[pygame.K_a] and self.player.x > 0 and self.isNotCollided(self.player.x-5,self.player.y):
-			self.moveLeft()
-		if keys[pygame.K_d] and self.player.x < WIDTH + self.player.width and self.isNotCollided(self.player.x+5,self.player.y):
-			self.moveRight()
 		if keys[pygame.K_w] and self.player.y > 0 and self.isNotCollided(self.player.x,self.player.y-5):
 			self.moveUp()
 		if keys[pygame.K_s] and self.player.y < HEIGHT - self.player.height and self.isNotCollided(self.player.x,self.player.y+5):
 			self.moveDown()
+		if keys[pygame.K_a] and self.player.x > 0 and self.isNotCollided(self.player.x-5,self.player.y):
+			self.moveLeft()
+		if keys[pygame.K_d] and self.player.x < WIDTH + self.player.width and self.isNotCollided(self.player.x+5,self.player.y):
+			self.moveRight()
 
 		if not(keys[pygame.K_a]) and not(keys[pygame.K_d]) and not(keys[pygame.K_w]) and not(keys[pygame.K_s]):
 			self.player.walk = 0
@@ -265,7 +283,7 @@ class Hmon():
 	def __init__(self):
 		self.stats = [random.randrange(0,32),random.randrange(0,32),random.randrange(0,32),random.randrange(0,32),random.randrange(0,32),random.randrange(0,32)]
 		self.status = "normal"
-		self.hp
+		self.hp = 10
 
 	def changeHealth(self):
 		pass
@@ -275,9 +293,10 @@ class Hmon():
 
 class baldman(Hmon):
 	def __init__(self):
-		super().__init__(self)
+		super().__init__()
 		self.name = "baldman"
 		self.type = "Harpur"
+		self.portrait = pygame.image.load('art/sprites/standing.png')
 
 class location():
 	def __init__(self,file,mask,transfer,music,x,y,width,height):
@@ -338,6 +357,7 @@ def main():
 
 		game.playerInput()
 		game.redraw()
+		game.encounter()
 		game.locationChange()
 		clock.tick(60)
 	pygame.quit()
