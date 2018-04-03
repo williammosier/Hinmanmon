@@ -103,6 +103,7 @@ class Hinman():
 		pygame.draw.rect(self.window,COLORS['white'],(0,0,640,480))
 		self.window.blit(self.player.sprites["forward"][0],(100,300))
 		self.window.blit(mon.portrait,(400,100))
+		pygame.display.update()
 		time.sleep(.6)
 
 	def dialogue(self,trainer):
@@ -155,8 +156,8 @@ class Hinman():
 
 	def encounter(self):
 		if 650 < self.player.x - self.locs[self.current_loc].x < 1200 and 700 < self.player.y - self.locs[self.current_loc].y < 1250 and self.current_loc == "hinman college":
-			x = random.randrange(1,101)
-			if x > 99:
+			x = random.randrange(1,201)
+			if x > 199:
 				mon = baldman()
 				self.battle(mon)
 
