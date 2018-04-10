@@ -1,8 +1,6 @@
 import pygame
-import random
-import time
 
-class location():
+class Location:
 	def __init__(self,file,mask,transfer,music,x,y,width,height):
 		self.file = file
 		self.x = x

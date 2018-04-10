@@ -1,21 +1,21 @@
 import pygame
-import random
-import time
 
-class player():
-	def __init__(self,file,x,y):
-		self.file = file
+class Player():
+	def __init__(self,sprites,x,y,pmask):
+		self.sprites = sprites
 		self.x = x
 		self.y = y
-		self.width = 40
-		self.height = 40
-		self.velocity = 5
+		self.width = 52
+		self.height = 34
+		self.velocity = 2
+		self.direction = "forward"
 		self.mon = []
 		self.walk = 0
-		self.mask = None
+		self.mask = pmask
 
 	def draw(self,win):
-		if self.walk > 2:
-			self.walk = 0
-		win.blit(self.file[self.walk],(self.x,self.y))
-		self.walk += 1
+ 		if self.walk > 39:
+ 			self.walk = 0
+ 		num = self.walk//10
+ 		win.blit(self.sprites[self.direction][num],(self.x,self.y))
+ 		self.walk += 1

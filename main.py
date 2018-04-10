@@ -1,33 +1,37 @@
 import pygame
-import random
 import time
-import Hinman
-import Hmon
-import location
-import player
-import trainer
+import hinman
+import menu
 
-#sets the possible moves for Hinmanmon
-MOVES = ()
 
 def main():
 	pygame.init()
 	pygame.mixer.init()
-	run = True
-
+	clock = pygame.time.Clock()
 	pygame.display.set_caption("Hinmanmon")
 
-	game = Hinman.Hinman()
+	game = hinman.Hinman()
+
+	intro = True
+	run = True
+
+	game = hinman.Hinman()
+	splash = menu.SplashScreen(game.window)
 
 	while run:
-		pygame.time.delay(50)
-
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				run = False
 
+		while splash.cutscene != 2:
+			splash.moveClouds()
+			clock.tick(60)
+
 		game.playerInput()
 		game.redraw()
+		game.encounter()
 		game.locationChange()
+		clock.tick(60)
+
 	pygame.quit()
 main()
