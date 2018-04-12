@@ -14,6 +14,8 @@ import trainer
 WIDTH = 640
 HEIGHT = 480
 
+MOVES = {}
+
 class Hinman():
 	def __init__(self):
 		self.window = pygame.display.set_mode((WIDTH,HEIGHT))

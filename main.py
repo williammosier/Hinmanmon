@@ -1,5 +1,5 @@
 import hinman
 
 def main():
-	model = hinman.Hinman()
+	hinman.Hinman()
 main()
