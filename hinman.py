@@ -3,9 +3,11 @@ import random
 import time
 
 import baldman
+import controller
 import gui
 import hinmanmon
 import location
+import menu
 import player
 import trainer
 
@@ -94,6 +96,35 @@ class Hinman():
 
 			}
 
+		#MAIN LOOP STARTS HERE
+		pygame.init()
+		pygame.mixer.init()
+		clock = pygame.time.Clock()
+		pygame.display.set_caption("Hinmanmon")
+
+		run = True
+
+		view = gui.GUI()
+		control = controller.Controller()
+		splash = menu.SplashScreen(view.window)
+
+		while run:
+			for event in pygame.event.get():
+				if event.type == pygame.QUIT:
+					run = False
+
+		# while splash.cutscene != 2:
+		# 	splash.moveClouds()
+		# 	clock.tick(60)
+
+			control.playerInput(self,view)
+			view.redraw(self)
+			self.encounter()
+			self.locationChange(view)
+			clock.tick(60)
+
+		pygame.quit()
+
 	def battle(self,mon,trainer=None):
 		self.window.blit(pygame.image.load('art/environment/battle_screen.jpg'),(0,0))
 		font = pygame.font.Font("art/font/AnonymousPro-Bold.ttf",20)
@@ -144,6 +175,34 @@ class Hinman():
 			self.locs[self.current_loc].y = ly or self.locs[self.current_loc].y
 			self.musicChange()
 			view.fadeIn(self)
+
+	def moveLeft(self):
+		if self.locs[self.current_loc].x == 0 or self.player.x >= WIDTH//2 - self.player.width//2:
+			self.player.x -= self.player.velocity
+		else:
+			self.locs[self.current_loc].x += self.player.velocity
+		self.player.direction = "left"
+
+	def moveRight(self):
+		if self.locs[self.current_loc].x == -self.locs[self.current_loc].width + WIDTH or self.player.x < WIDTH//2 - self.player.width//2:
+			self.player.x += self.player.velocity
+		else:
+			self.locs[self.current_loc].x -= self.player.velocity
+		self.player.direction = "right"
+
+	def moveUp(self):
+		if self.locs[self.current_loc].y == 0 or self.player.y >= HEIGHT//2 - self.player.height//2:
+			self.player.y -= self.player.velocity
+		else:
+			self.locs[self.current_loc].y += self.player.velocity
+		self.player.direction = "backward"
+
+	def moveDown(self):
+		if self.locs[self.current_loc].y == -self.locs[self.current_loc].height + HEIGHT or self.player.y < HEIGHT//2 - self.player.height//2:
+			self.player.y += self.player.velocity
+		else:
+			self.locs[self.current_loc].y -= self.player.velocity
+		self.player.direction = "forward"
 
 	def musicChange(self):
 		pygame.mixer.music.load(self.locs[self.current_loc].music)
