@@ -1,0 +1,90 @@
+import pygame
+import time
+
+WIDTH = 640
+HEIGHT = 480
+
+COLORS = {
+	'black': (0,0,0),
+	'navy': (20,20,80),
+	'lightgray': (220,220,220),
+	'white': (255,255,255),
+	'pantone342': (64,112,96),
+	'darkgreen': (14,72,56),
+	'greygreen': (204,252,236)
+}
+
+class GUI:
+	def __init__(self):
+		self.window = pygame.display.set_mode((WIDTH,HEIGHT))
+
+	def dialogue(self,trainer):
+		font = pygame.font.Font("art/font/AnonymousPro-Bold.ttf",20)
+		self.drawTextBox(font,trainer)
+		time.sleep(.2)
+		index = 0
+		text_y = 370
+		text_speed = .03
+		while index < len(trainer.dialogue):
+			next_tile = True
+			line = trainer.dialogue[index:index + 46]
+			index += 46
+			text_sound = pygame.mixer.Sound('sound/sfx/talk.wav')
+			while line[-1] != " ":
+				line = line[:-1]
+				index -= 1
+			text_x = 30
+			pygame.mixer.Sound.play(text_sound, -1)
+			for i in line:
+				for event in pygame.event.get():
+					if event.type == pygame.KEYDOWN:
+						text_speed = 0
+				self.window.blit(font.render(i,False,COLORS['black']),(text_x,text_y))
+				time.sleep(text_speed)
+				pygame.display.update()
+				text_x += 10
+			text_y += 20
+			pygame.mixer.Sound.stop(text_sound)
+			if text_y > 430 and index < len(trainer.dialogue):
+				while next_tile:
+					for event in pygame.event.get():
+						if event.type == pygame.KEYDOWN:
+							next_tile = False
+				self.drawTextBox(font,trainer)
+				text_speed = .03
+				text_y = 370
+		while next_tile:
+			for event in pygame.event.get():
+				if event.type == pygame.KEYDOWN:
+					next_tile = False
+
+	def drawTextBox(self,font,trainer):
+		pygame.draw.rect(self.window,COLORS['darkgreen'],(20,HEIGHT-150,600,130),10)
+		pygame.draw.rect(self.window,COLORS['greygreen'],(25,HEIGHT-145,590,120))
+		pygame.draw.rect(self.window,COLORS['darkgreen'],(20,HEIGHT-150,470,130),10)
+		self.window.blit(trainer.portrait,(495,335))
+		self.window.blit(font.render(trainer.name,False,COLORS['black']),(30,340))
+		pygame.display.update()
+
+	def fadeIn(self,model):
+		image = pygame.image.load("art/environment/fade.png")
+		for i in range(0,225,10):
+			self.window.blit(model.locs[model.current_loc].file,(model.locs[model.current_loc].x,model.locs[model.current_loc].y))
+			self.window.blit(model.player.sprites[model.player.direction][0],(model.player.x,model.player.y))
+			image.set_alpha(225-i)
+			self.window.blit(image,(0,0))
+			pygame.display.flip()
+
+	def fadeOut(self):
+		image = pygame.image.load("art/environment/fade.png")
+		for i in range(225):
+			image.set_alpha(i)
+			self.window.blit(image,(0,0))
+			pygame.display.flip()
+			pygame.time.delay(1)
+
+	def redraw(self,model):
+		self.window.blit(model.locs[model.current_loc].file,(model.locs[model.current_loc].x,model.locs[model.current_loc].y))
+		num = model.player.walkCycle()
+		self.window.blit(model.player.sprites[model.player.direction][num],(model.player.x,model.player.y))
+		pygame.display.update()

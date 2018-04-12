@@ -13,9 +13,8 @@ class Player():
 		self.walk = 0
 		self.mask = pmask
 
-	def draw(self,win):
-		if self.walk > 39:
+	def walkCycle(self):
+		if self.walk > 38:
 			self.walk = 0
-		num = self.walk//10
-		win.blit(self.sprites[self.direction][num],(self.x,self.y))
 		self.walk += 1
+		return self.walk//10
