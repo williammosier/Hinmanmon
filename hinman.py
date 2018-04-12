@@ -14,16 +14,6 @@ import trainer
 WIDTH = 640
 HEIGHT = 480
 
-COLORS = {
-	'black': (0,0,0),
-	'navy': (20,20,80),
-	'lightgray': (220,220,220),
-	'white': (255,255,255),
-	'pantone342': (64,112,96),
-	'darkgreen': (14,72,56),
-	'greygreen': (204,252,236)
-}
-
 class Hinman():
 	def __init__(self):
 		self.window = pygame.display.set_mode((WIDTH,HEIGHT))
@@ -96,7 +86,7 @@ class Hinman():
 
 			}
 
-		#MAIN LOOP STARTS HERE
+		#MAIN LOOP STARTS HERE#########################
 		pygame.init()
 		pygame.mixer.init()
 		clock = pygame.time.Clock()
@@ -104,7 +94,7 @@ class Hinman():
 
 		run = True
 
-		view = gui.GUI()
+		view = gui.GUI(WIDTH,HEIGHT)
 		control = controller.Controller()
 		splash = menu.SplashScreen(view.window)
 
@@ -113,9 +103,9 @@ class Hinman():
 				if event.type == pygame.QUIT:
 					run = False
 
-		# while splash.cutscene != 2:
-		# 	splash.moveClouds()
-		# 	clock.tick(60)
+			# while splash.cutscene != 2:
+			# 	splash.moveClouds()
+			# 	clock.tick(60)
 
 			control.playerInput(self,view)
 			view.redraw(self)
@@ -124,18 +114,7 @@ class Hinman():
 			clock.tick(60)
 
 		pygame.quit()
-
-	def battle(self,mon,trainer=None):
-		self.window.blit(pygame.image.load('art/environment/battle_screen.jpg'),(0,0))
-		font = pygame.font.Font("art/font/AnonymousPro-Bold.ttf",20)
-		if trainer != None:
-			self.window.blit(font.render("You are challenged by" + trainer.name + "!",False,COLORS['black']),(30,350))
-		else:
-			self.window.blit(font.render("a wild " + mon.name + " appeared!",False,COLORS['black']),(30,350))
-		self.window.blit(self.player.sprites["forward"][0],(100,300))
-		self.window.blit(mon.portrait,(445,130))
-		pygame.display.update()
-		time.sleep(4)
+		#MAIN LOOP ENDS HERE###########################
 
 	def encounter(self):
 		if 650 < self.player.x - self.locs[self.current_loc].x < 1200 and 700 < self.player.y - self.locs[self.current_loc].y < 1250 and self.current_loc == "hinman college":
@@ -155,8 +134,6 @@ class Hinman():
 	def locationChange(self,view):
 		offset = (self.player.x - self.locs[self.current_loc].x,self.player.y - self.locs[self.current_loc].y)
 		result = (self.locs[self.current_loc].transfer.overlap(self.player.mask,offset))
-		if result: #and hasAccessTo()
-			view.fadeOut()
 			
 		self.specificLoadzone(result,view,"hinman college","success center",90,300,slx=2400,sly=1300,suy=1500)
 		self.specificLoadzone(result,view,"success center","hinman college",560,215,sly=300)
@@ -168,6 +145,7 @@ class Hinman():
 
 	def specificLoadzone(self,result,view,start,end,ex,ey,lx=None,ly=None,slx=0,sux=5000,sly=0,suy=5000):
 		if self.current_loc == start and slx < self.player.x - self.locs[self.current_loc].x < sux and sly < self.player.y - self.locs[self.current_loc].y < suy and result:
+			view.fadeOut()
 			self.current_loc = end
 			self.player.x = ex
 			self.player.y = ey

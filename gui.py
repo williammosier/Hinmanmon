@@ -1,9 +1,6 @@
 import pygame
 import time
 
-WIDTH = 640
-HEIGHT = 480
-
 COLORS = {
 	'black': (0,0,0),
 	'navy': (20,20,80),
@@ -15,8 +12,20 @@ COLORS = {
 }
 
 class GUI:
-	def __init__(self):
+	def __init__(self,WIDTH,HEIGHT):
 		self.window = pygame.display.set_mode((WIDTH,HEIGHT))
+
+	def battle(self,mon,trainer=None):
+		self.window.blit(pygame.image.load('art/environment/battle_screen.jpg'),(0,0))
+		font = pygame.font.Font("art/font/AnonymousPro-Bold.ttf",20)
+		if trainer != None:
+			self.window.blit(font.render("You are challenged by" + trainer.name + "!",False,COLORS['black']),(30,350))
+		else:
+			self.window.blit(font.render("a wild " + mon.name + " appeared!",False,COLORS['black']),(30,350))
+		self.window.blit(self.player.sprites["forward"][0],(100,300))
+		self.window.blit(mon.portrait,(445,130))
+		pygame.display.update()
+		time.sleep(4)
 
 	def dialogue(self,trainer):
 		font = pygame.font.Font("art/font/AnonymousPro-Bold.ttf",20)
