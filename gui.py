@@ -14,6 +14,8 @@ COLORS = {
 class GUI:
 	def __init__(self,WIDTH,HEIGHT):
 		self.window = pygame.display.set_mode((WIDTH,HEIGHT))
+		self.HEIGHT = HEIGHT
+		self.WIDTH = WIDTH
 
 	def battle(self,mon,trainer=None):
 		self.window.blit(pygame.image.load('art/environment/battle_screen.jpg'),(0,0))
@@ -68,9 +70,9 @@ class GUI:
 					next_tile = False
 
 	def drawTextBox(self,font,trainer):
-		pygame.draw.rect(self.window,COLORS['darkgreen'],(20,HEIGHT-150,600,130),10)
-		pygame.draw.rect(self.window,COLORS['greygreen'],(25,HEIGHT-145,590,120))
-		pygame.draw.rect(self.window,COLORS['darkgreen'],(20,HEIGHT-150,470,130),10)
+		pygame.draw.rect(self.window,COLORS['darkgreen'],(20,self.HEIGHT-150,600,130),10)
+		pygame.draw.rect(self.window,COLORS['greygreen'],(25,self.HEIGHT-145,590,120))
+		pygame.draw.rect(self.window,COLORS['darkgreen'],(20,self.HEIGHT-150,470,130),10)
 		self.window.blit(trainer.portrait,(495,335))
 		self.window.blit(font.render(trainer.name,False,COLORS['black']),(30,340))
 		pygame.display.update()

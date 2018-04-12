@@ -82,7 +82,7 @@ class Hinman():
 
 		self.current_loc = "success center"
 		self.dialogues = None
-		self.player = player.Player(char,WIDTH//2 - 20,HEIGHT//2 - 20,pmask)
+		self.player = player.Player(char,230,250,pmask)
 		self.trainers = {
 			"Al Vos": trainer.Trainer("Al Vos",None,pygame.image.load('art/character_portraits/al_vos.png'), "Hello, I'm Al Vos! Welcome to Hinman college! What the fuck did you just fucking say about me, you little bitch? I’ll have you know I graduated top of my class in the Navy Seals, and I’ve been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills.",())
 
