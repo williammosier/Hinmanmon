@@ -1,5 +1,5 @@
-import hinman
+import controller
 
 def main():
-	hinman.Hinman()
+	controller.Controller()
 main()

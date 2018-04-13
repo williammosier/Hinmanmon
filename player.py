@@ -5,8 +5,8 @@ class Player():
 		self.sprites = sprites
 		self.x = x
 		self.y = y
-		self.width = 52
-		self.height = 34
+		self.width = 34
+		self.height = 54
 		self.velocity = 2
 		self.direction = "forward"
 		self.mon = []
