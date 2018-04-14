@@ -1,11 +1,40 @@
 import pygame
+import gui
+import hinman
+import menu
 
 WIDTH = 640
 HEIGHT = 480
 
 class Controller:
 	def __init__(self):
-		pass
+		pygame.init()
+		pygame.mixer.init()
+		clock = pygame.time.Clock()
+		pygame.display.set_caption("Hinmanmon")
+
+		run = True
+
+		view = gui.GUI(WIDTH,HEIGHT)
+		model = hinman.Hinman()
+		splash = menu.SplashScreen(view.window)
+
+		while run:
+			for event in pygame.event.get():
+				if event.type == pygame.QUIT:
+					run = False
+
+			# while splash.cutscene != 2:
+			# 	splash.moveClouds()
+			# 	clock.tick(60)
+
+			self.playerInput(model,view)
+			view.redraw(model)
+			model.encounter(gui)
+			model.locationChange(view)
+			clock.tick(60)
+
+		pygame.quit()
 
 	def playerInput(self,model,view):
 		keys = pygame.key.get_pressed()

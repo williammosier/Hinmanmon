@@ -3,11 +3,8 @@ import random
 import time
 
 import baldman
-import controller
-import gui
 import hinmanmon
 import location
-import menu
 import player
 import trainer
 
@@ -58,8 +55,8 @@ class Hinman():
 
 			"smith":\
 			location.Location(pygame.image.load('art/environment/smith.png'),\
-			pygame.image.load('art/environment/smith_loadzones.png').convert_alpha(),\
-			pygame.image.load('art/environment/smith_mask.png'),\
+			pygame.image.load('art/environment/smith_mask.png').convert_alpha(),\
+			pygame.image.load('art/environment/smith_loadzones.png'),\
 			'sound/music/reslife.ogg',0,0,2000,500)
 			}
 
@@ -101,61 +98,66 @@ class Hinman():
 			}
 
 		#MAIN LOOP STARTS HERE#########################
-		pygame.init()
-		pygame.mixer.init()
-		clock = pygame.time.Clock()
-		pygame.display.set_caption("Hinmanmon")
+		# pygame.init()
+		# pygame.mixer.init()
+		# clock = pygame.time.Clock()
+		# pygame.display.set_caption("Hinmanmon")
 
-		run = True
+		# run = True
 
-		view = gui.GUI(WIDTH,HEIGHT)
-		control = controller.Controller()
-		splash = menu.SplashScreen(view.window)
+		# view = gui.GUI(WIDTH,HEIGHT)
+		# control = controller.Controller()
+		# splash = menu.SplashScreen(view.window)
 
-		while run:
-			for event in pygame.event.get():
-				if event.type == pygame.QUIT:
-					run = False
+		# while run:
+		# 	for event in pygame.event.get():
+		# 		if event.type == pygame.QUIT:
+		# 			run = False
 
-			# while splash.cutscene != 2:
-			# 	splash.moveClouds()
-			# 	clock.tick(60)
+		# 	# while splash.cutscene != 2:
+		# 	# 	splash.moveClouds()
+		# 	# 	clock.tick(60)
 
-			control.playerInput(self,view)
-			view.redraw(self)
-			self.encounter()
-			self.locationChange(view)
-			clock.tick(60)
+		# 	control.playerInput(self,view)
+		# 	view.redraw(self)
+		# 	self.encounter()
+		# 	self.locationChange(view)
+		# 	clock.tick(60)
 
-		pygame.quit()
+		# pygame.quit()
 		#MAIN LOOP ENDS HERE###########################
 
-	def encounter(self):
+	def encounter(self,gui):
 		if 650 < self.player.x - self.locs[self.current_loc].x < 1200 and 700 < self.player.y - self.locs[self.current_loc].y < 1250 and self.current_loc == "hinman college":
 			x = random.randrange(1,201)
 			if x > 199:
 				mon = baldman.Baldman()
-				self.battle(mon)
+				gui.battle(mon)
 
 	def interact(self,view):
 		view.dialogue(self.trainers["Al Vos"])
 
 	def isNotCollided(self,player_x,player_y):
 		offset = (player_x - self.locs[self.current_loc].x,player_y - self.locs[self.current_loc].y)
-		print(offset)
+		print(((player_x,player_y),offset))
 		return not(self.locs[self.current_loc].mask.overlap(self.player.mask, offset))
 
 	def locationChange(self,view):
 		offset = (self.player.x - self.locs[self.current_loc].x,self.player.y - self.locs[self.current_loc].y)
 		result = (self.locs[self.current_loc].transfer.overlap(self.player.mask,offset))
 			
-		self.specificLoadzone(result,view,"hinman college","success center",90,300,slx=2400,sly=1300,suy=1500)
-		self.specificLoadzone(result,view,"success center","hinman college",560,215,sly=300)
+		self.specificLoadzone(result,view,"hinman college","success center",90,300,slx=2850,sly=1600,suy=1700)
+		self.specificLoadzone(result,view,"success center","hinman college",460,220,lx=-2359,ly=-1415,sly=300)
 
-		self.specificLoadzone(result,view,"hinman college","lehman",280,300,lx=0,ly=0,slx=1400,sux=1600,sly=1200,suy=1400)
-		self.specificLoadzone(result,view,"hinman college","lehman",500,75,lx=-1300,slx=2000,sux=2200,suy=1200)
-		self.specificLoadzone(result,view,"lehman","hinman college",250,250,lx=-1250,ly=-1150,sly=300)
-		self.specificLoadzone(result,view,"lehman","hinman college",250,250,lx=-1850,ly=-1050,slx=1800,suy=100)
+		self.specificLoadzone(result,view,"hinman college","lehman",280,300,lx=0,ly=0,slx=1700,sux=1800,sly=1500,suy=1600)
+		self.specificLoadzone(result,view,"lehman","hinman college",302,214,lx=-1443,ly=-1383,sux=320,sly=350)
+		self.specificLoadzone(result,view,"hinman college","lehman",500,75,lx=-1300,slx=2450,sux=2500,sly=1350,suy=1450)
+		self.specificLoadzone(result,view,"lehman","hinman college",302,214,lx=-1850,ly=-1050,slx=1800,suy=100)
+
+		self.specificLoadzone(result,view,"hinman college","smith",500,75,lx=-1300,slx=2450,sux=2500,sly=1350,suy=1450)
+		self.specificLoadzone(result,view,"smith","hinman college",302,214,lx=-1850,ly=-1050,slx=1800,suy=100)
+		self.specificLoadzone(result,view,"hinman college","smith",430,175,lx=-1300,slx=2200,sux=2250,sly=2450,suy=2550)
+		self.specificLoadzone(result,view,"smith","hinman college",302,214,lx=-1850,ly=-1050,slx=1800,suy=100)
 
 	def specificLoadzone(self,result,view,start,end,ex,ey,lx=None,ly=None,slx=0,sux=5000,sly=0,suy=5000):
 		if self.current_loc == start and slx < self.player.x - self.locs[self.current_loc].x < sux and sly < self.player.y - self.locs[self.current_loc].y < suy and result:
@@ -169,28 +171,28 @@ class Hinman():
 			view.fadeIn(self)
 
 	def moveLeft(self):
-		if self.locs[self.current_loc].x == 0 or self.player.x >= WIDTH//2 - self.player.width//2:
+		if self.locs[self.current_loc].x >= 0 or self.player.x >= WIDTH//2 - self.player.width//2:
 			self.player.x -= self.player.velocity
 		else:
 			self.locs[self.current_loc].x += self.player.velocity
 		self.player.direction = "left"
 
 	def moveRight(self):
-		if self.locs[self.current_loc].x == -self.locs[self.current_loc].width + WIDTH or self.player.x < WIDTH//2 - self.player.width//2:
+		if self.locs[self.current_loc].x <= -self.locs[self.current_loc].width + WIDTH or self.player.x < WIDTH//2 - self.player.width//2:
 			self.player.x += self.player.velocity
 		else:
 			self.locs[self.current_loc].x -= self.player.velocity
 		self.player.direction = "right"
 
 	def moveUp(self):
-		if self.locs[self.current_loc].y == 0 or self.player.y >= HEIGHT//2 - self.player.height//2:
+		if self.locs[self.current_loc].y >= 0 or self.player.y >= HEIGHT//2 - self.player.height//2:
 			self.player.y -= self.player.velocity
 		else:
 			self.locs[self.current_loc].y += self.player.velocity
 		self.player.direction = "backward"
 
 	def moveDown(self):
-		if self.locs[self.current_loc].y == -self.locs[self.current_loc].height + HEIGHT or self.player.y < HEIGHT//2 - self.player.height//2:
+		if self.locs[self.current_loc].y <= -self.locs[self.current_loc].height + HEIGHT or self.player.y < HEIGHT//2 - self.player.height//2:
 			self.player.y += self.player.velocity
 		else:
 			self.locs[self.current_loc].y -= self.player.velocity
