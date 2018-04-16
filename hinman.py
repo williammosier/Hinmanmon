@@ -136,6 +136,7 @@ class Hinman():
 			if x > 199:
 				mon = baldman.Baldman()
 				return (True,mon)
+		return (False,None)
 
 
 	def interact(self,view):

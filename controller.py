@@ -32,21 +32,44 @@ class Controller:
 			view.redrawMain(model)
 			encounter = model.encounter()
 			if encounter[0]:
-				battleState = [encounter[1],model.player,"dialogue screen","battle intro"]
-				self.playerInputBattle(battleState)
-				model.battleCalc(battleState)
-				view.redrawBattle(battleState)
+				print("encounter")
+				battleState = [encounter[1],model.player,"dialogue screen","battle intro",[0,0]]
+				while battleState[3] != "finished":
+					self.playerInputBattle(battleState)
+					print("input")
+					model.battleCalc(battleState)
+					print("calc")
+					view.redrawBattle(battleState)
+					print("redraw")
 			model.locationChange(view)
 			clock.tick(60)
 
 		pygame.quit()
 
 	def playerInputBattle(self,state):
+		clock.tick(60)
 		keys = pygame.key.get_pressed()
-		if state[2] == "dialogue screen":
-			pass
-		if state[2] == "choose action":
-			pass
+		if state[2] == "choose action" or state[2] == "choose move":
+			if keys[pygame.K_a]:
+				state[4][0] -= 1
+			if keys[pygame.K_d]:
+				state[4][0] += 1
+			if keys[pygame.K_w]:
+				state[4][1] -= 1
+			if keys[pygame.K_s]:
+				state[4][1] += 1
+
+			if state[4][0] < 0:
+				state[4][0] = 0
+			if state[4][0] > 1:
+				state[4][0] = 1
+			if state[4][1] < 0:
+				state[4][1] = 0
+			if state[4][1] > 1:
+				state[4][1] = 1
+
+			if keys[pygame.K_e]:
+				pass
 
 	def playerInputMain(self,model,view):
 		keys = pygame.key.get_pressed()
