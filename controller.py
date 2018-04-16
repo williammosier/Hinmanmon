@@ -10,7 +10,7 @@ class Controller:
 	def __init__(self):
 		pygame.init()
 		pygame.mixer.init()
-		clock = pygame.time.Clock()
+		self.clock = pygame.time.Clock()
 		pygame.display.set_caption("Hinmanmon")
 
 		run = True
@@ -31,23 +31,23 @@ class Controller:
 			self.playerInputMain(model,view)
 			view.redrawMain(model)
 			encounter = model.encounter()
-			if encounter[0]:
-				print("encounter")
-				battleState = [encounter[1],model.player,"dialogue screen","battle intro",[0,0]]
-				while battleState[3] != "finished":
-					self.playerInputBattle(battleState)
-					print("input")
-					model.battleCalc(battleState)
-					print("calc")
-					view.redrawBattle(battleState)
-					print("redraw")
+			# if encounter[0]:
+			# 	print("encounter")
+			# 	battleState = [encounter[1],model.player,"dialogue screen","battle intro",[0,0]]
+			# 	while battleState[3] != "finished":
+			# 		self.playerInputBattle(battleState)
+			# 		print("input")
+			# 		model.battleCalc(battleState)
+			# 		print("calc")
+			# 		view.redrawBattle(battleState)
+			# 		print("redraw")
 			model.locationChange(view)
-			clock.tick(60)
+			self.clock.tick(60)
 
 		pygame.quit()
 
 	def playerInputBattle(self,state):
-		clock.tick(60)
+		self.clock.tick(60)
 		keys = pygame.key.get_pressed()
 		if state[2] == "choose action" or state[2] == "choose move":
 			if keys[pygame.K_a]:
