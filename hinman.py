@@ -127,12 +127,16 @@ class Hinman():
 		# pygame.quit()
 		#MAIN LOOP ENDS HERE###########################
 
-	def encounter(self,gui):
+	def battleCalc(self,state):
+		pass
+
+	def encounter(self):
 		if 650 < self.player.x - self.locs[self.current_loc].x < 1200 and 700 < self.player.y - self.locs[self.current_loc].y < 1250 and self.current_loc == "hinman college":
 			x = random.randrange(1,201)
 			if x > 199:
 				mon = baldman.Baldman()
-				gui.battle(mon)
+				return (True,mon)
+
 
 	def interact(self,view):
 		view.dialogue(self.trainers["Al Vos"])
