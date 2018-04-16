@@ -28,15 +28,27 @@ class Controller:
 			# 	splash.moveClouds()
 			# 	clock.tick(60)
 
-			self.playerInput(model,view)
-			view.redraw(model)
-			model.encounter(gui)
+			self.playerInputMain(model,view)
+			view.redrawMain(model)
+			encounter = model.encounter()
+			if encounter[0]:
+				battleState = [encounter[1],model.player,"dialogue screen","battle intro"]
+				self.playerInputBattle(battleState)
+				model.battleCalc(battleState)
+				view.redrawBattle(battleState)
 			model.locationChange(view)
 			clock.tick(60)
 
 		pygame.quit()
 
-	def playerInput(self,model,view):
+	def playerInputBattle(self,state):
+		keys = pygame.key.get_pressed()
+		if state[2] == "dialogue screen":
+			pass
+		if state[2] == "choose action":
+			pass
+
+	def playerInputMain(self,model,view):
 		keys = pygame.key.get_pressed()
 		offset = (model.player.x - model.locs[model.current_loc].x,model.player.y - model.locs[model.current_loc].y)
 		result = model.locs[model.current_loc].mask.overlap(model.player.mask,offset)

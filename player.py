@@ -10,6 +10,7 @@ class Player():
 		self.velocity = 2
 		self.direction = "forward"
 		self.mon = []
+		self.currentMon = -1
 		self.walk = 0
 		self.mask = pmask
 
