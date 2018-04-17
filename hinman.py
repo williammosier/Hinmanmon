@@ -11,7 +11,7 @@ import trainer
 WIDTH = 640
 HEIGHT = 480
 
-MOVES = {}
+MOVES = {"bop":5,"smash":10,"rotate":6}
 
 class Hinman():
 	def __init__(self):
@@ -99,7 +99,7 @@ class Hinman():
 			}
 
 	def battleCalc(self,state):
-		pass
+		print(state)
 
 	def encounter(self):
 		if 760 < self.player.x - self.locs[self.current_loc].x < 1387 and 790 < self.player.y - self.locs[self.current_loc].y < 1445 and self.current_loc == "hinman college":

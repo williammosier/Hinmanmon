@@ -100,12 +100,13 @@ class GUI:
 			#self.dialogue(model.trainers["Al Vos"])
 		if state[2] == "choose action":
 			self.window.blit(pygame.image.load('art/environment/battle_screen.jpg'),(0,0))
-			pygame.draw.rect(self.window,COLORS['darkgreen'],(20*state[4][0],self.HEIGHT-150,100,40),2)
+			pygame.draw.rect(self.window,COLORS['darkgreen'],(30+290*state[4][0],360+50*state[4][1],285,40),2)
 		if state[2] == "choose move":
 			self.window.blit(pygame.image.load('art/environment/battle_screen.jpg'),(0,0))
-			pygame.draw.rect(self.window,COLORS['darkgreen'],(20*state[4][0],self.HEIGHT-150,100,40),2)
-		self.window.blit(state[1].sprites["backward"][0],(10,10))
-		self.window.blit(state[0].portrait,(100,100))
+			pygame.draw.rect(self.window,COLORS['darkgreen'],(30+290*state[4][0],360+50*state[4][1],285,40),2)
+		self.window.blit(state[1].sprites["backward"][0],(160,280))
+		self.window.blit(state[0].portrait,(430,130))
+		pygame.display.update()
 
 	def redrawMain(self,model):
 		self.window.blit(model.locs[model.current_loc].file,(model.locs[model.current_loc].x,model.locs[model.current_loc].y))
