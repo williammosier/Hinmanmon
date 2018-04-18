@@ -94,7 +94,85 @@ class Hinman():
 
 		self.dialogues = None
 		self.trainers = {
-			"Al Vos": trainer.Trainer("Al Vos",None,pygame.image.load('art/character_portraits/al_vos.png'), "Hello, I'm Al Vos! Welcome to Hinman college! What the fuck did you just fucking say about me, you little bitch? I’ll have you know I graduated top of my class in the Navy Seals, and I’ve been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills.",())
+			"Al Vos": trainer.Trainer(\
+			"Al Vos",None,pygame.image.load('art/character_portraits/al_vos.png'),\
+			"Hello, I'm Al Vos! Welcome to Hinman college! What the fuck did you just fucking say about me, you little bitch? "+\
+			"I’ll have you know I graduated top of my class in the Navy Seals, and I’ve been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills.",()),
+			
+			#SMITH HALL
+			"Alex and Owen": trainer.Trainer(\
+			"Alex and Owen",None,pygame.image.load('art/character_portraits/smith_president.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"Nancy and Katie": trainer.Trainer(\
+			"Nancy and Katie",None,pygame.image.load('art/character_portraits/smith_academic.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"Melanie": trainer.Trainer(\
+			"Melanie",None,pygame.image.load('art/character_portraits/smith_service.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"Isaac and Abby": trainer.Trainer(\
+			"Isaac and Abby",None,pygame.image.load('art/character_portraits/smith_social.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"Sam Atkin": trainer.Trainer(\
+			"Sam Atkin",None,pygame.image.load('art/character_portraits/sam.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"Gabi and Shayna": trainer.Trainer(\
+			"Gabi and Shayna",None,pygame.image.load('art/character_portraits/smith_pr.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			#ROOSEVELT HALL
+			"Colleen and Lexi": trainer.Trainer(\
+			"Colleen and Lexi",None,pygame.image.load('art/character_portraits/roosevelt_president.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"Phariha": trainer.Trainer(\
+			"Phariha",None,pygame.image.load('art/character_portraits/roosevelt_academic.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"Rebecca": trainer.Trainer(\
+			"Rebecca",None,pygame.image.load('art/character_portraits/roosevelt_service.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"FILLER": trainer.Trainer(\
+			"FILLER",None,pygame.image.load('art/character_portraits/roosevelt_social.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"Dyanna": trainer.Trainer(\
+			"Dyanna",None,pygame.image.load('art/character_portraits/roosevelt_financial.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"Shanté": trainer.Trainer(\
+			"Shanté",None,pygame.image.load('art/character_portraits/roosevelt_pr.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			#LEHMAN HALL
+			"Jenn and Sophia": trainer.Trainer(\
+			"Jenn and Sophia",None,pygame.image.load('art/character_portraits/lehman_president.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"Merry": trainer.Trainer(\
+			"Merry",None,pygame.image.load('art/character_portraits/lehman_academic.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"Brandon": trainer.Trainer(\
+			"Brandon",None,pygame.image.load('art/character_portraits/lehman_service.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"Joe": trainer.Trainer(\
+			"Joe",None,pygame.image.load('art/character_portraits/lehman_social.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"Megan": trainer.Trainer(\
+			"Megan",None,pygame.image.load('art/character_portraits/lehman_financial.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"Colleen": trainer.Trainer(\
+			"Colleen",None,pygame.image.load('art/character_portraits/lehman_pr.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
 
 			}
 
@@ -111,7 +189,9 @@ class Hinman():
 
 
 	def interact(self,view):
-		view.dialogue(self.trainers["Al Vos"])
+		#view.dialogue(self.trainers["Al Vos"])
+		for i in self.trainers:
+			view.dialogue(self.trainers[i])
 
 	def isNotCollided(self,player_x,player_y):
 		offset = (player_x - self.locs[self.current_loc].x,player_y - self.locs[self.current_loc].y)
