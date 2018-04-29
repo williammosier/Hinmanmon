@@ -95,14 +95,23 @@ class GUI:
 			pygame.time.delay(1)
 
 	def redrawBattle(self,state):
+		font = pygame.font.Font("art/font/AnonymousPro-Bold.ttf",20)
 		if state[2] == "dialogue screen":
 			self.window.blit(pygame.image.load('art/environment/battle_screen.jpg'),(0,0))
 			#self.dialogue(model.trainers["Al Vos"])
 		if state[2] == "choose action":
 			self.window.blit(pygame.image.load('art/environment/battle_screen.jpg'),(0,0))
+			self.window.blit(font.render("Attack",False,COLORS['black']),(30,360))
+			self.window.blit(font.render("Bag",False,COLORS['black']),(320,360))
+			self.window.blit(font.render("Mon",False,COLORS['black']),(30,410))
+			self.window.blit(font.render("Run",False,COLORS['black']),(320,410))
 			pygame.draw.rect(self.window,COLORS['darkgreen'],(30+290*state[4][0],360+50*state[4][1],285,40),2)
 		if state[2] == "choose move":
 			self.window.blit(pygame.image.load('art/environment/battle_screen.jpg'),(0,0))
+			self.window.blit(font.render("Move 1",False,COLORS['black']),(30,360))
+			self.window.blit(font.render("Move 2",False,COLORS['black']),(320,360))
+			self.window.blit(font.render("Move 3",False,COLORS['black']),(30,410))
+			self.window.blit(font.render("Back",False,COLORS['black']),(320,410))
 			pygame.draw.rect(self.window,COLORS['darkgreen'],(30+290*state[4][0],360+50*state[4][1],285,40),2)
 		self.window.blit(state[1].sprites["backward"][0],(160,280))
 		self.window.blit(state[0].portrait,(430,130))

@@ -110,8 +110,9 @@ class Hinman():
 		return (False,None)
 
 
-	def interact(self,view):
-		view.dialogue(self.trainers["Al Vos"])
+	def interact(self,view,model):
+		if model.current_loc == "success center":
+			view.dialogue(self.trainers["Al Vos"])
 
 	def isNotCollided(self,player_x,player_y):
 		offset = (player_x - self.locs[self.current_loc].x,player_y - self.locs[self.current_loc].y)

@@ -62,8 +62,17 @@ class Controller:
 			if keys[pygame.K_q]:
 				state[3] = "finished"
 
-		if keys[pygame.K_e]:
+		if keys[pygame.K_e] and state[2] == "dialogue screen":
 			state[2] = "choose action"
+		if keys[pygame.K_e] and state[2] == "choose action" and state[4] == [1,1]:
+			state[3] = "finished"
+		if keys[pygame.K_e] and state[2] == "choose action" and state[4] == [0,0]:
+			state[2] = "choose move"
+		if keys[pygame.K_e] and state[2] == "choose move" and state[4] != [1,1]:
+			print(state[4][0] + 2*state[4][1])
+		if keys[pygame.K_e] and state[2] == "choose move" and state[4] == [1,1]:
+			state[2] = "choose action"
+		keys = []
 
 		return state
 
@@ -90,7 +99,7 @@ class Controller:
 			model.player.walk = 0
 
 		if keys[pygame.K_e]:
-			model.interact(view)
+			model.interact(view,model)
 
 		if keys[pygame.K_b] and model.player.velocity == 5:
 			model.player.velocity *= 2
