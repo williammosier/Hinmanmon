@@ -24,9 +24,9 @@ class Controller:
 				if event.type == pygame.QUIT:
 					run = False
 
-			# while splash.cutscene != 2:
-			# 	splash.moveClouds()
-			# 	clock.tick(60)
+			while splash.cutscene != 2:
+				splash.moveClouds()
+				self.clock.tick(60)
 
 			self.playerInputMain(model,view)
 			view.redrawMain(model)

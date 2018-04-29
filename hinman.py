@@ -94,8 +94,135 @@ class Hinman():
 
 		self.dialogues = None
 		self.trainers = {
-			"Al Vos": trainer.Trainer("Al Vos",None,pygame.image.load('art/character_portraits/al_vos.png'), "Hello, I'm Al Vos! Welcome to Hinman college! What the fuck did you just fucking say about me, you little bitch? I’ll have you know I graduated top of my class in the Navy Seals, and I’ve been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills.",())
+			"Al Vos": trainer.Trainer(\
+			"Al Vos",None,pygame.image.load('art/character_portraits/al_vos.png'),\
+			"Hello, I'm Al Vos! Welcome to Hinman college! What the fuck did you just fucking say about me, you little bitch? "+\
+			"I’ll have you know I graduated top of my class in the Navy Seals, and I’ve been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills.",()),
+			
+			#SMITH HALL
+			"President Alex and Owen": trainer.Trainer(\
+			"President Alex and Owen",None,pygame.image.load('art/character_portraits/smith_president.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
 
+			"Academic VP Nancy and Katie": trainer.Trainer(\
+			"Academic VP Nancy and Katie",None,pygame.image.load('art/character_portraits/smith_academic.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"Service VP Melanie": trainer.Trainer(\
+			"Service VP Melanie",None,pygame.image.load('art/character_portraits/smith_service.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"Social VP Isaac and Abby": trainer.Trainer(\
+			"Social VP Isaac and Abby",None,pygame.image.load('art/character_portraits/smith_social.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"Sam Atkin": trainer.Trainer(\
+			"Sam Atkin",None,pygame.image.load('art/character_portraits/sam.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"PR Gabi and Shayna": trainer.Trainer(\
+			"PR Gabi and Shayna",None,pygame.image.load('art/character_portraits/smith_pr.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			#ROOSEVELT HALL
+			"President Colleen and Lexi": trainer.Trainer(\
+			"President Colleen and Lexi",None,pygame.image.load('art/character_portraits/roosevelt_president.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"Academic VP Phariha": trainer.Trainer(\
+			"Academic VP Phariha",None,pygame.image.load('art/character_portraits/roosevelt_academic.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"Service VP Rebecca": trainer.Trainer(\
+			"Service VP Rebecca",None,pygame.image.load('art/character_portraits/roosevelt_service.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"Social VP Victoria": trainer.Trainer(\
+			"Social VP Victoria",None,pygame.image.load('art/character_portraits/roosevelt_social.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"Financial VP Dyanna": trainer.Trainer(\
+			"Financial VP Dyanna",None,pygame.image.load('art/character_portraits/roosevelt_financial.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"PR Shanté": trainer.Trainer(\
+			"PR Shanté",None,pygame.image.load('art/character_portraits/roosevelt_pr.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			#LEHMAN HALL
+			"President Jenn and Sophia": trainer.Trainer(\
+			"President Jenn and Sophia",None,pygame.image.load('art/character_portraits/lehman_president.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"Academic VP Merry": trainer.Trainer(\
+			"Academic VP Merry",None,pygame.image.load('art/character_portraits/lehman_academic.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"Service VP Brandon": trainer.Trainer(\
+			"Service VP Brandon",None,pygame.image.load('art/character_portraits/lehman_service.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"Social VP Joe": trainer.Trainer(\
+			"Social VP Joe",None,pygame.image.load('art/character_portraits/lehman_social.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"Financial VP Megan": trainer.Trainer(\
+			"Financial VP Megan",None,pygame.image.load('art/character_portraits/lehman_financial.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"PR Colleen": trainer.Trainer(\
+			"PR Colleen",None,pygame.image.load('art/character_portraits/lehman_pr.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			#HUGHES HALL
+			"President Will": trainer.Trainer(\
+			"President Will",None,pygame.image.load('art/character_portraits/hughes_president.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"Academic VP Briea and Hannah": trainer.Trainer(\
+			"Academic VP Briea and Hannah",None,pygame.image.load('art/character_portraits/hughes_academic.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"Service VP Lizzie and Marvin": trainer.Trainer(\
+			"Service VP Lizzie and Marvin",None,pygame.image.load('art/character_portraits/hughes_service.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"Social VP Dora and Hannah": trainer.Trainer(\
+			"Social VP Dora and Hannah",None,pygame.image.load('art/character_portraits/hughes_social.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"Financial VP Ryan": trainer.Trainer(\
+			"Financial VP Ryan",None,pygame.image.load('art/character_portraits/hughes_financial.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"PR Brenna": trainer.Trainer(\
+			"PR Brenna",None,pygame.image.load('art/character_portraits/hughes_pr.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			#CLEVELAND HALL
+			"President Daniel": trainer.Trainer(\
+			"President Daniel",None,pygame.image.load('art/character_portraits/cleveland_president.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"Academic VP Will": trainer.Trainer(\
+			"Academic VP Will",None,pygame.image.load('art/character_portraits/cleveland_academic.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"Service VP Julia": trainer.Trainer(\
+			"Service VP Julia",None,pygame.image.load('art/character_portraits/cleveland_service.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"Social VP Jake": trainer.Trainer(\
+			"Social VP Jake",None,pygame.image.load('art/character_portraits/cleveland_social.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"Financial VP Brian": trainer.Trainer(\
+			"Financial VP Brian",None,pygame.image.load('art/character_portraits/cleveland_financial.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
+
+			"PR Jacob and Kass": trainer.Trainer(\
+			"PR Jacob and Kass",None,pygame.image.load('art/character_portraits/cleveland_pr.png'),\
+			"The quick brown fox jumps over the lazy dog.",()),
 			}
 
 	def battleCalc(self,state):
@@ -109,10 +236,11 @@ class Hinman():
 				return (True,mon)
 		return (False,None)
 
-
 	def interact(self,view,model):
 		if model.current_loc == "success center":
 			view.dialogue(self.trainers["Al Vos"])
+		for i in self.trainers:
+			view.dialogue(self.trainers[i])
 
 	def isNotCollided(self,player_x,player_y):
 		offset = (player_x - self.locs[self.current_loc].x,player_y - self.locs[self.current_loc].y)
