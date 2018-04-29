@@ -237,9 +237,43 @@ class Hinman():
 		return (False,None)
 
 	def interact(self,view,model):
-		if model.current_loc != "hinman collegesw":
-			for i in self.trainers:
-				view.dialogue(self.trainers[i])
+		if model.current_loc == "success center":
+			view.dialogue(self.trainers["Al Vos"])
+		if model.current_loc == "smith":
+			view.dialogue(self.trainers["President Alex and Owen"])
+			view.dialogue(self.trainers["Academic VP Nancy and Katie"])
+			view.dialogue(self.trainers["Service VP Melanie"])
+			view.dialogue(self.trainers["Social VP Isaac and Abby"])
+			view.dialogue(self.trainers["Sam Atkin"])
+			view.dialogue(self.trainers["PR Gabi and Shayna"])
+		if model.current_loc == "roosevelt":
+			view.dialogue(self.trainers["President Colleen and Lexi"])
+			view.dialogue(self.trainers["Academic VP Phariha"])
+			view.dialogue(self.trainers["Service VP Rebecca"])
+			view.dialogue(self.trainers["Social VP Victoria"])
+			view.dialogue(self.trainers["Financial VP Dyanna"])
+			view.dialogue(self.trainers["PR Shanté"])
+		if model.current_loc == "lehman":
+			view.dialogue(self.trainers["President Jenn and Sophia"])
+			view.dialogue(self.trainers["Academic VP Merry"])
+			view.dialogue(self.trainers["Service VP Brandon"])
+			view.dialogue(self.trainers["Social VP Joe"])
+			view.dialogue(self.trainers["Financial VP Megan"])
+			view.dialogue(self.trainers["PR Colleen"])
+		if model.current_loc == "hughes":
+			view.dialogue(self.trainers["President Will"])
+			view.dialogue(self.trainers["Academic VP Briea and Hannah"])
+			view.dialogue(self.trainers["Service VP Lizzie and Marvin"])
+			view.dialogue(self.trainers["Social VP Dora and Hannah"])
+			view.dialogue(self.trainers["Financial VP Ryan"])
+			view.dialogue(self.trainers["PR Brenna"])
+		if model.current_loc == "cleveland":
+			view.dialogue(self.trainers["President Daniel"])
+			view.dialogue(self.trainers["Academic VP Will"])
+			view.dialogue(self.trainers["Service VP Julia"])
+			view.dialogue(self.trainers["Social VP Jake"])
+			view.dialogue(self.trainers["Financial VP Brian"])
+			view.dialogue(self.trainers["PR Jacob and Kass"])
 
 	def isNotCollided(self,player_x,player_y):
 		offset = (player_x - self.locs[self.current_loc].x,player_y - self.locs[self.current_loc].y)
