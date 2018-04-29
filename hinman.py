@@ -1,19 +1,19 @@
 import pygame
 import random
 import time
-
 import baldman
 import hinmanmon
 import location
 import player
 import trainer
 
+#defines window dimensions
 WIDTH = 640
 HEIGHT = 480
 
 MOVES = {"bop":5,"smash":10,"rotate":6}
 
-class Hinman():
+class Hinman:
 	def __init__(self):
 		self.window = pygame.display.set_mode((WIDTH,HEIGHT))
 		self.locs = {

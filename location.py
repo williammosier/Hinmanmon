@@ -1,6 +1,6 @@
 import pygame
 
-class Location():
+class Location:
 	def __init__(self,file,mask,transfer,music,x,y,width,height):
 		self.file = file
 		self.x = x
@@ -11,3 +11,4 @@ class Location():
 		self.transfer = pygame.mask.from_surface(transfer)
 		self.encounter = None
 		self.music = music
+
