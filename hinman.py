@@ -237,10 +237,9 @@ class Hinman():
 		return (False,None)
 
 	def interact(self,view,model):
-		if model.current_loc == "success center":
-			view.dialogue(self.trainers["Al Vos"])
-		for i in self.trainers:
-			view.dialogue(self.trainers[i])
+		if model.current_loc != "hinman collegesw":
+			for i in self.trainers:
+				view.dialogue(self.trainers[i])
 
 	def isNotCollided(self,player_x,player_y):
 		offset = (player_x - self.locs[self.current_loc].x,player_y - self.locs[self.current_loc].y)
@@ -264,15 +263,15 @@ class Hinman():
 		self.specificLoadzone(result,view,"hinman college","roosevelt",160,70,lx=-1,ly=-1,slx=2480,sux=2540,sly=1645,suy=1650)
 		self.specificLoadzone(result,view,"roosevelt","hinman college",302,214,lx=-2206,ly=-1410,slx=0,sux=150,sly=40,suy=80)
 		
-		# self.specificLoadzone(result,view,"hinman college","lehman",500,75,lx=-1300,slx=2450,sux=2500,sly=1350,suy=1450)
-		# self.specificLoadzone(result,view,"lehman","hinman college",302,214,lx=-1850,ly=-1050,slx=1800,suy=100)
-		# self.specificLoadzone(result,view,"hinman college","lehman",280,300,lx=0,ly=0,slx=1700,sux=1800,sly=1500,suy=1600)
-		# self.specificLoadzone(result,view,"lehman","hinman college",302,214,lx=-1443,ly=-1383,sux=320,sly=350)
+		self.specificLoadzone(result,view,"hinman college","lehman",500,75,lx=-1300,slx=2450,sux=2500,sly=1350,suy=1450)
+		self.specificLoadzone(result,view,"lehman","hinman college",302,214,lx=-2205,ly=-1163,slx=1800,suy=100)
+		self.specificLoadzone(result,view,"hinman college","lehman",280,300,lx=-1,ly=-20,slx=1700,sux=1800,sly=1500,suy=1600)
+		self.specificLoadzone(result,view,"lehman","hinman college",302,214,lx=-1443,ly=-1383,sux=320,sly=350)
 
-		# self.specificLoadzone(result,view,"hinman college","hughes",280,300,lx=0,ly=0,slx=1400,sux=1430,sly=460,suy=520)
-		# self.specificLoadzone(result,view,"hughes","hinman college",302,214,lx=-1443,ly=-1383,sux=320,sly=350)
-		# self.specificLoadzone(result,view,"hinman college","hughes",500,75,lx=-1300,slx=660,sux=730,sly=600,suy=670)
-		# self.specificLoadzone(result,view,"hughes","hinman college",302,214,lx=-1850,ly=-1050,slx=1800,suy=100)
+		self.specificLoadzone(result,view,"hinman college","hughes",280,300,lx=-1,ly=-20,slx=660,sux=730,sly=600,suy=670)
+		self.specificLoadzone(result,view,"hughes","hinman college",302,214,lx=-393,ly=-467,sux=320,sly=350)
+		self.specificLoadzone(result,view,"hinman college","hughes",500,70,lx=-1300,slx=1400,sux=1430,sly=460,suy=520)
+		self.specificLoadzone(result,view,"hughes","hinman college",302,214,lx=-1149,ly=-283,slx=1800,suy=100)
 
 		self.specificLoadzone(result,view,"hinman college","cleveland",380,300,lx=-1300,slx=550,sux=630,sly=700,suy=760)
 		self.specificLoadzone(result,view,"cleveland","hinman college",302,214,lx=-363,ly=-517,slx=1660,sux=1740,sly=300,suy=400)
