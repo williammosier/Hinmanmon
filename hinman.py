@@ -237,43 +237,76 @@ class Hinman:
 		return (False,None)
 
 	def interact(self,view,model):
+		offset = (self.player.x - self.locs[self.current_loc].x,self.player.y - self.locs[self.current_loc].y)
+		result = (self.locs[self.current_loc].transfer.overlap(self.player.mask,offset))
+
 		if model.current_loc == "success center":
 			view.dialogue(self.trainers["Al Vos"])
 		if model.current_loc == "smith":
-			view.dialogue(self.trainers["President Alex and Owen"])
-			view.dialogue(self.trainers["Academic VP Nancy and Katie"])
-			view.dialogue(self.trainers["Service VP Melanie"])
-			view.dialogue(self.trainers["Social VP Isaac and Abby"])
-			view.dialogue(self.trainers["Sam Atkin"])
-			view.dialogue(self.trainers["PR Gabi and Shayna"])
+			if 945 < self.player.x - self.locs[self.current_loc].x < 1020 and 50 < self.player.y - self.locs[self.current_loc].y < 125 and result:
+				view.dialogue(self.trainers["President Alex and Owen"])
+			if 1400 < self.player.x - self.locs[self.current_loc].x < 1460 and 20 < self.player.y - self.locs[self.current_loc].y < 60 and result:
+				view.dialogue(self.trainers["Academic VP Nancy and Katie"])
+			if 1290 < self.player.x - self.locs[self.current_loc].x < 1350 and 160 < self.player.y - self.locs[self.current_loc].y < 180 and result:
+				view.dialogue(self.trainers["Service VP Melanie"])
+			if 1030 < self.player.x - self.locs[self.current_loc].x < 1100 and 70 < self.player.y - self.locs[self.current_loc].y < 125 and result:
+				view.dialogue(self.trainers["Social VP Isaac and Abby"])
+			if 1170 < self.player.x - self.locs[self.current_loc].x < 1220 and 160 < self.player.y - self.locs[self.current_loc].y < 200 and result:
+				view.dialogue(self.trainers["Sam Atkin"])
+			if 1110 < self.player.x - self.locs[self.current_loc].x < 1170 and 20 < self.player.y - self.locs[self.current_loc].y < 60 and result:
+				view.dialogue(self.trainers["PR Gabi and Shayna"])
 		if model.current_loc == "roosevelt":
-			view.dialogue(self.trainers["President Colleen and Lexi"])
-			view.dialogue(self.trainers["Academic VP Phariha"])
-			view.dialogue(self.trainers["Service VP Rebecca"])
-			view.dialogue(self.trainers["Social VP Victoria"])
-			view.dialogue(self.trainers["Financial VP Dyanna"])
-			view.dialogue(self.trainers["PR Shanté"])
+			if 908 < self.player.x - self.locs[self.current_loc].x < 960 and 300 < self.player.y - self.locs[self.current_loc].y < 350 and result:
+				view.dialogue(self.trainers["President Colleen and Lexi"])
+			if 1010 < self.player.x - self.locs[self.current_loc].x < 1060 and 300 < self.player.y - self.locs[self.current_loc].y < 350 and result:
+				view.dialogue(self.trainers["Academic VP Phariha"])
+			if 1190 < self.player.x - self.locs[self.current_loc].x < 1230 and 220 < self.player.y - self.locs[self.current_loc].y < 250 and result:
+				view.dialogue(self.trainers["Service VP Rebecca"])
+			if 1330 < self.player.x - self.locs[self.current_loc].x < 1380 and 290 < self.player.y - self.locs[self.current_loc].y < 360 and result:
+				view.dialogue(self.trainers["Social VP Victoria"])
+			if 1290 < self.player.x - self.locs[self.current_loc].x < 1350 and 220 < self.player.y - self.locs[self.current_loc].y < 240 and result:
+				view.dialogue(self.trainers["Financial VP Dyanna"])
+			if 1120 < self.player.x - self.locs[self.current_loc].x < 1180 and 360 < self.player.y - self.locs[self.current_loc].y < 400 and result:
+				view.dialogue(self.trainers["PR Shanté"])
 		if model.current_loc == "lehman":
-			view.dialogue(self.trainers["President Jenn and Sophia"])
-			view.dialogue(self.trainers["Academic VP Merry"])
-			view.dialogue(self.trainers["Service VP Brandon"])
-			view.dialogue(self.trainers["Social VP Joe"])
+			if 1010 < self.player.x - self.locs[self.current_loc].x < 1075 and 300 < self.player.y - self.locs[self.current_loc].y < 355 and result:
+				view.dialogue(self.trainers["President Jenn and Sophia"])
+			if 800 < self.player.x - self.locs[self.current_loc].x < 850 and 360 < self.player.y - self.locs[self.current_loc].y < 400 and result:
+				view.dialogue(self.trainers["Academic VP Merry"])
+			if 530 < self.player.x - self.locs[self.current_loc].x < 555 and 130 < self.player.y - self.locs[self.current_loc].y < 180 and result:
+				view.dialogue(self.trainers["Service VP Brandon"])
+			if 860 < self.player.x - self.locs[self.current_loc].x < 880 and 130 < self.player.y - self.locs[self.current_loc].y < 180 and result:
+				view.dialogue(self.trainers["Social VP Joe"])
+			if 640 < self.player.x - self.locs[self.current_loc].x < 690 and 280 < self.player.y - self.locs[self.current_loc].y < 305 and result:
 			view.dialogue(self.trainers["Financial VP Megan"])
-			view.dialogue(self.trainers["PR Colleen"])
+			if 690 < self.player.x - self.locs[self.current_loc].x < 750 and 360 < self.player.y - self.locs[self.current_loc].y < 400 and result:
+				view.dialogue(self.trainers["PR Colleen"])
 		if model.current_loc == "hughes":
-			view.dialogue(self.trainers["President Will"])
-			view.dialogue(self.trainers["Academic VP Briea and Hannah"])
-			view.dialogue(self.trainers["Service VP Lizzie and Marvin"])
-			view.dialogue(self.trainers["Social VP Dora and Hannah"])
-			view.dialogue(self.trainers["Financial VP Ryan"])
-			view.dialogue(self.trainers["PR Brenna"])
+			if 1000 < self.player.x - self.locs[self.current_loc].x < 1050 and 300 < self.player.y - self.locs[self.current_loc].y < 360 and result:
+				view.dialogue(self.trainers["President Will"])
+			if 600 < self.player.x - self.locs[self.current_loc].x < 670 and 300 < self.player.y - self.locs[self.current_loc].y < 315 and result:
+				view.dialogue(self.trainers["Academic VP Briea and Hannah"])
+			if 550 < self.player.x - self.locs[self.current_loc].x < 620 and 370 < self.player.y - self.locs[self.current_loc].y < 410 and result:
+				view.dialogue(self.trainers["Service VP Lizzie and Marvin"])
+			if 870 < self.player.x - self.locs[self.current_loc].x < 940 and 300 < self.player.y - self.locs[self.current_loc].y < 360 and result:
+				view.dialogue(self.trainers["Social VP Dora and Hannah"])
+			if 505 < self.player.x - self.locs[self.current_loc].x < 525 and 150 < self.player.y - self.locs[self.current_loc].y < 190 and result:
+				view.dialogue(self.trainers["Financial VP Ryan"])
+			if 650 < self.player.x - self.locs[self.current_loc].x < 700 and 220 < self.player.y - self.locs[self.current_loc].y < 250 and result:
+				view.dialogue(self.trainers["PR Brenna"])
 		if model.current_loc == "cleveland":
-			view.dialogue(self.trainers["President Daniel"])
-			view.dialogue(self.trainers["Academic VP Will"])
-			view.dialogue(self.trainers["Service VP Julia"])
-			view.dialogue(self.trainers["Social VP Jake"])
-			view.dialogue(self.trainers["Financial VP Brian"])
-			view.dialogue(self.trainers["PR Jacob and Kass"])
+			if 940 < self.player.x - self.locs[self.current_loc].x < 1000 and 280 < self.player.y - self.locs[self.current_loc].y < 350 and result:
+				view.dialogue(self.trainers["President Daniel"])
+			if 1220 < self.player.x - self.locs[self.current_loc].x < 1270 and 180 < self.player.y - self.locs[self.current_loc].y < 220 and result:
+				view.dialogue(self.trainers["Academic VP Will"])
+			if 1130 < self.player.x - self.locs[self.current_loc].x < 1180 and 360 < self.player.y - self.locs[self.current_loc].y < 400 and result:
+				view.dialogue(self.trainers["Service VP Julia"])
+			if 1220 < self.player.x - self.locs[self.current_loc].x < 1270 and 230 < self.player.y - self.locs[self.current_loc].y < 280 and result:
+				view.dialogue(self.trainers["Social VP Jake"])
+			if 1330 < self.player.x - self.locs[self.current_loc].x < 1380 and 260 < self.player.y - self.locs[self.current_loc].y < 300 and result:
+				view.dialogue(self.trainers["Financial VP Brian"])
+			if 1020 < self.player.x - self.locs[self.current_loc].x < 1100 and 300 < self.player.y - self.locs[self.current_loc].y < 350 and result:
+				view.dialogue(self.trainers["PR Jacob and Kass"])
 
 	def isNotCollided(self,player_x,player_y):
 		offset = (player_x - self.locs[self.current_loc].x,player_y - self.locs[self.current_loc].y)
