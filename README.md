@@ -17,17 +17,17 @@ Hinmanmon is a game concept heavily inspired by both the Pokemon franchise and t
 ***    
 
 ## User Interface Design
-1. Main Menu/Start Screen
+### 1. Main Menu/Start Screen
     This screen is the first thing a user sees. An opening animation and music plays before prompting the user to “press any key to continue.” After an input is pressed or the animation concludes, the game will begin with the opening dialogue.
     ![alt text](screenshots/title.png "Main Menu Screen")
     ![alt text](screenshots/opening_dialogue.png "Opening Dialogue")
-2. Success Center Location
+### 2. Success Center Location
     This screen is the first location the player appears in after the opening animations and cutscenes finish. From here, the player can have their first interactions with NPCs, specifically Al Vos, the collegiate professor of Hinman. They are free to explore the room and exit into the Hinman College exterior.
     ![alt text](screenshots/success_center.png "Success Center Interior")
-3. Hinman College Location
+### 3. Hinman College Location
     This screen is where the player can explore Hinman College. While there are no NPCs to interact with outside, if the player wanders around the Hinman quad, there is a chance they may randomly encounter a Hinmanmon. This is a very early feature, but is included to showcase our progress on these features.
     ![alt text](screenshots/hinman.png "Hinman College Exterior")
-4. Building Location (i.e. Hughes, Cleveland, Lehman, Roosevelt, Smith)
+### 4. Building Location (i.e. Hughes, Cleveland, Lehman, Roosevelt, Smith)
     This screen represents the interior of the various residential halls in Hinman College. There are NPCs in all of the main lounges representing the members of those building’s executive boards. They can all be interacted with by going near them and pressing the “e” key. They all have their own unique dialogue that appears when the two aforementioned conditions are met. 
     ![alt text](screenshots/main_lounge.png "Hinman Building Interior")
     ![alt text](screenshots/dialogue.png "Hinman NPC Dialogue")
