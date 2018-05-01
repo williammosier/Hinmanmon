@@ -1,15 +1,10 @@
-﻿* Cover Page
-    * A cover page containing your group member names, project title, course number, and semester
-    * Github URL
-    * Project Demo Presentation as Google Slide URL
-Example:
-# Hinman-mon
+﻿# Hinman-mon
 ## CS 110 Final Project
 ### Spring, 2018
 
 https://github.com/binghamtonuniversity-cs110/final-project-spr18-dream-team-meme-team
 
-[link to demo presentation slides](#)
+https://docs.google.com/presentation/d/1WR46w5xDMWn6waTDRbIO-Vndbci4F-cpaTgP9X-acBg/edit?usp=sharing
 
 ### Dream Team, Meme Team:
 #### William Mosier, Christopher Woloshyn, Michael Yip
@@ -17,14 +12,15 @@ https://github.com/binghamtonuniversity-cs110/final-project-spr18-dream-team-mem
 ***
 
 ## Project Description
-We are attempting to create a game similar to that of the Pokemon Franchise themed around the residential community Hinman College. A few years ago, there was an RA event in Roosevelt hall that was Pokemon theme. The staff promised the participants a fan made copy of Pokemon themed in Hinman, with references to the community. Unfortunately, they never delivered.
+Hinmanmon is a game concept heavily inspired by both the Pokemon franchise and the Hinman College Residential Community. The game features the player as a trainer that cares for, and battles with Hinmanmon (although these features are still in early development). It is set in the Hinman community and revolves heavily around exploring and interacting with the many residents of the various buildings. All art environments were made from scratch and are based on real people and locations from Hinman. This includes Al Vos, the collegiate professor of Hinman, and every building executive board member, including our backend specialist William Mosier (President of Hughes Hall). Currently, the gameplay involves exploring the open world and interacting with all the various residents of the community. The battling mechanics are still in early development, but a random encounter feature has been implemented to showcase the progress on this set of features. Currently, there is no way to lose, but the player can exit the game at will.
 
 ***    
 
 ## User Interface Design
-* A wireframe or drawing of the user interface concept along with a short description of the interface. You should have one for each screen in your program.
-    * For example, if your program has a start screen, game screen, and game over screen, you should include a wireframe / screenshot / drawing of each one and a short description of the components
-    * You should also have a screenshot of your final GUI
+* Main Menu/Start Screen
+    * This screen is the first thing a user sees. An opening animation and music plays before prompting the user to “press any key to continue.” After an input is pressed or the animation concludes, the game will begin with the opening dialogue.
+* Success Center Location
+    * 
 
 ***        
 
