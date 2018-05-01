@@ -21,6 +21,7 @@ Hinmanmon is a game concept heavily inspired by both the Pokemon franchise and t
 ### 1. Main Menu/Start Screen
 This screen is the first thing a user sees. An opening animation and music plays before prompting the user to “press any key to continue.” After an input is pressed or the animation concludes, the game will begin with the opening dialogue.
 ![alt text](screenshots/title.png "Main Menu Screen")
+
 ![alt text](screenshots/opening_dialogue.png "Opening Dialogue")
 
 ### 2. Success Center Location
@@ -34,6 +35,7 @@ This screen is where the player can explore Hinman College. While there are no N
 ### 4. Building Location (i.e. Hughes, Cleveland, Lehman, Roosevelt, Smith)
 This screen represents the interior of the various residential halls in Hinman College. There are NPCs in all of the main lounges representing the members of those building’s executive boards. They can all be interacted with by going near them and pressing the “e” key. They all have their own unique dialogue that appears when the two aforementioned conditions are met. 
 ![alt text](screenshots/main_lounge.png "Hinman Building Interior")
+
 ![alt text](screenshots/dialogue.png "Hinman NPC Dialogue")
 ***        
 
