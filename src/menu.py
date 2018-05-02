@@ -127,7 +127,7 @@ class SplashScreen:
 		'''
 		font = pygame.font.Font("art/font/AnonymousPro-Bold.ttf",24)
 		for event in pygame.event.get():
-			if event.type == pygame.KEYDOWN:
+			if event.type == pygame.KEYDOWN and self.keypress:
 				self.bg_clouds_v *= 160
 				self.fg_clouds_v *= 80
 				self.keypress = False
@@ -164,6 +164,7 @@ class SplashScreen:
 			self.stopMusic()
 			self.pauseClouds()
 			self.fadeOut()
+			time.sleep(3)
 			self.cutscene += 1
 			self.bg = pygame.image.load('art/environment/fade.png')
 		if self.cutscene == 1:
