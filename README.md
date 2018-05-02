@@ -52,7 +52,7 @@ This screen represents the interior of the various residential halls in Hinman C
 
 ### Class and File Relationships (Flowchart)
 
-![alt text](screenshots/class_structure.png "Class Structure Flowchart")
+![alt text](screenshots/class_structure.jpg "Class Structure Flowchart")
 
 ### List of Classes
 
@@ -108,15 +108,15 @@ After the player is transported to the success center, we test to make sure the 
 
 | Step                  | Procedure     | Expected Results  | Actual Results |
 | ----------------------|:-------------:| -----------------:| -------------- |
-|  1  | Run main.py  | 1) Player moves to the down when pressed once. 2) Player continues to move to the down when button is held and the sprite animation plays giving the illusion of walking. |  |
-|  2  | User Presses Any Key When Prompted | | |
-|  3  | Press D Key; hold D Key | 
-|  4  | Press A Key; hold A Key |
-|  5  | Press S Key; hold S Key |
-|  6  | Press W Key; hold W Key |
-|  7  | Check room collision and interior object collision |
-|  8  | Press the E key when near Al Vos |
-|  9  | Exit Success Center |
-|  10 | General Playtesting |
-|  11 | Random Encounter |
-|  12 | Click red “X” button in top right corner of window |
+|  1  | Run main.py  | Main Menu opens normally and is functional. Music begins playback. All animations execute and prompt the user for input. ||
+|  2  | User Presses Any Key When Prompted | Player moves to the up when pressed once. Player continues to move to the up when button is held and the sprite animation plays giving the illusion of walking. ||
+|  3  | Press D Key; hold D Key |||
+|  4  | Press A Key; hold A Key |||
+|  5  | Press S Key; hold S Key |||
+|  6  | Press W Key; hold W Key |||
+|  7  | Check room collision and interior object collision |||
+|  8  | Press the E key when near Al Vos |||
+|  9  | Exit Success Center |||
+|  10 | General Playtesting |||
+|  11 | Random Encounter |||
+|  12 | Click red “X” button in top right corner of window |||
