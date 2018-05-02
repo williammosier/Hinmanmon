@@ -84,7 +84,7 @@ Worked closely with the Front End and Back End Specialists to create the test fu
 
 ### Front End Specialist - Christopher Woloshyn
 
-Front-end lead conducted significant research on using pygame to create visual aspects such as buttons and on-screen text. She used this information to design and program a consistent UI to help the player navigate the title screen, the instructions page, and the “GAME OVER” screen. In addition to implementing the wide majority of the visual element for the UI, she also collaborated with the Software Lead to create a jukebox function that played music and to add sound effects to the menu navigation buttons.
+Front-end lead created all art assets. Every environment, trainer sprite, mask, and portrait was made for each Hinman NPC. Played a role in the overall organization of the code, including the models, especially the dictionary structures. Worked closely with the Back End Specialist to develop many methods for the overall project. Also created the opening animations and menu UI.
 
 ### Back End Specialist - William Mosier
 
