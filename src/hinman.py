@@ -264,6 +264,7 @@ class Hinman:
 
 		if model.current_loc == "success center":
 			view.dialogue(self.trainers["Al Vos"])
+
 		if model.current_loc == "smith":
 			if 945 < offset[0] < 1020 and 50 < offset[1] < 125 and result:
 				view.dialogue(self.trainers["President Alex and Owen"])
@@ -277,6 +278,7 @@ class Hinman:
 				view.dialogue(self.trainers["Sam Atkin"])
 			if 1110 < offset[0] < 1170 and 20 < offset[1] < 60 and result:
 				view.dialogue(self.trainers["PR Gabi and Shayna"])
+
 		if model.current_loc == "roosevelt":
 			if 908 < offset[0] < 960 and 300 < offset[1] < 350 and result:
 				view.dialogue(self.trainers["President Colleen and Lexi"])
@@ -290,6 +292,7 @@ class Hinman:
 				view.dialogue(self.trainers["Financial VP Dyanna"])
 			if 1120 < offset[0] < 1180 and 360 < offset[1] < 400 and result:
 				view.dialogue(self.trainers["PR Shanté"])
+
 		if model.current_loc == "lehman":
 			if 1010 < offset[0] < 1075 and 300 < offset[1] < 355 and result:
 				view.dialogue(self.trainers["President Jenn and Sophia"])
@@ -303,6 +306,7 @@ class Hinman:
 				view.dialogue(self.trainers["Financial VP Megan"])
 			if 690 < offset[0] < 750 and 360 < offset[1] < 400 and result:
 				view.dialogue(self.trainers["PR Colleen"])
+
 		if model.current_loc == "hughes":
 			if 1000 < offset[0] < 1050 and 300 < offset[1] < 360 and result:
 				view.dialogue(self.trainers["President Will"])
@@ -316,6 +320,7 @@ class Hinman:
 				view.dialogue(self.trainers["Financial VP Ryan"])
 			if 650 < offset[0] < 700 and 220 < offset[1] < 250 and result:
 				view.dialogue(self.trainers["PR Brenna"])
+				
 		if model.current_loc == "cleveland":
 			if 940 < offset[0] < 1000 and 280 < offset[1] < 350 and result:
 				view.dialogue(self.trainers["President Daniel"])

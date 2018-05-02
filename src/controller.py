@@ -86,13 +86,13 @@ class Controller:
 		else:
 			pygame.display.set_caption("NO HIT"+" locx: "+str(model.locs[model.current_loc].x)+" locy: "+str(model.locs[model.current_loc].y))
 
-		if keys[pygame.K_w] and model.player.y > 0 and model.isNotCollided(model.player.x,model.player.y-model.player.velocity):
+		if keys[pygame.K_w] and model.player.y > 0 and model.isNotCollided(model.player.x,model.player.y-model.player.velocity) and not keys[pygame.K_s]:
 			model.moveUp()
-		if keys[pygame.K_s] and model.player.y < HEIGHT - model.player.height and model.isNotCollided(model.player.x,model.player.y+model.player.velocity):
+		if keys[pygame.K_s] and model.player.y < HEIGHT - model.player.height and model.isNotCollided(model.player.x,model.player.y+model.player.velocity) and not keys[pygame.K_w]:
 			model.moveDown()
-		if keys[pygame.K_a] and model.player.x > 0 and model.isNotCollided(model.player.x-model.player.velocity,model.player.y):
+		if keys[pygame.K_a] and model.player.x > 0 and model.isNotCollided(model.player.x-model.player.velocity,model.player.y) and not keys[pygame.K_d]:
 			model.moveLeft()
-		if keys[pygame.K_d] and model.player.x < WIDTH + model.player.width and model.isNotCollided(model.player.x+model.player.velocity,model.player.y):
+		if keys[pygame.K_d] and model.player.x < WIDTH + model.player.width and model.isNotCollided(model.player.x+model.player.velocity,model.player.y) and not keys[pygame.K_a]:
 			model.moveRight()
 
 		if not(keys[pygame.K_a]) and not(keys[pygame.K_d]) and not(keys[pygame.K_w]) and not(keys[pygame.K_s]):
