@@ -108,8 +108,8 @@ After the player is transported to the success center, we test to make sure the 
 
 | Step                  | Procedure     | Expected Results  | Actual Results |
 | ----------------------|:-------------:| -----------------:| -------------- |
-|  1  | Run main.py  | Main Menu opens normally and is functional. Music begins playback. All animations execute and prompt the user for input. ||
-|  2  | User Presses Any Key When Prompted | Player moves to the up when pressed once. Player continues to move to the up when button is held and the sprite animation plays giving the illusion of walking. ||
+|  1  |Run main.py  |Main Menu opens normally and is functional. Music begins playback. All animations execute and prompt the user for input. ||
+|  2  |User Presses Any Key When Prompted |Player moves to the up when pressed once. Player continues to move to the up when button is held and the sprite animation plays giving the illusion of walking. ||
 |  3  | Press D Key; hold D Key |||
 |  4  | Press A Key; hold A Key |||
 |  5  | Press S Key; hold S Key |||
