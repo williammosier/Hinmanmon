@@ -108,8 +108,7 @@ After the player is transported to the success center, we test to make sure the 
 
 | Step                  | Procedure     | Expected Results  | Actual Results |
 | ----------------------|:-------------:| -----------------:| -------------- |
-|  1  | Run main.py  | 1) Player moves to the down when pressed once.
-2) Player continues to move to the down when button is held and the sprite animation plays giving the illusion of walking. |  |
+|  1  | Run main.py  | 1) Player moves to the down when pressed once. 2) Player continues to move to the down when button is held and the sprite animation plays giving the illusion of walking. |  |
 |  2  | User Presses Any Key When Prompted | | |
 |  3  | Press D Key; hold D Key | 
 |  4  | Press A Key; hold A Key |
