@@ -107,16 +107,16 @@ After the player is transported to the success center, we test to make sure the 
 ## Acceptence Test Procedure
 
 | Step                  | Procedure     | Expected Results  | Actual Results |
-| ----------------------|:-------------:| -----------------:| -------------- |
-|  1                    |Run main.py    |Main Menu opens normally and is functional. Music begins playback. All animations execute and prompt the user for input. ||
-|  2                    |User Presses Any Key When Prompted |Player moves to the up when pressed once. Player continues to move to the up when button is held and the sprite animation plays giving the illusion of walking. ||
-|  3  | Press D Key; hold D Key |||
-|  4  | Press A Key; hold A Key |||
-|  5  | Press S Key; hold S Key |||
-|  6  | Press W Key; hold W Key |||
-|  7  | Check room collision and interior object collision |||
-|  8  | Press the E key when near Al Vos |||
-|  9  | Exit Success Center |||
-|  10 | General Playtesting |||
-|  11 | Random Encounter |||
-|  12 | Click red “X” button in top right corner of window |||
+| --------------------- |:-------------:| ----------------- | -------------- |
+|  1  | Run main.py |Main Menu opens normally and is functional. Music begins playback. All animations execute and prompt the user for input. ||
+|  2  | User Presses Any Key When Prompted |Player moves to the up when pressed once. Player continues to move to the up when button is held and the sprite animation plays giving the illusion of walking. ||
+|  3  | Press D Key; hold D Key | Player moves to the right when pressed once. Player continues to move to the right when button is held and the sprite animation plays giving the illusion of walking. ||
+|  4  | Press A Key; hold A Key | Player moves to the left when pressed once. Player continues to move to the left when button is held and the sprite animation plays giving the illusion of walking. ||
+|  5  | Press S Key; hold S Key | Player moves to the down when pressed once. Player continues to move to the down when button is held and the sprite animation plays giving the illusion of walking. ||
+|  6  | Press W Key; hold W Key | Player moves to the up when pressed once. Player continues to move to the up when button is held and the sprite animation plays giving the illusion of walking. ||
+|  7  | Check room collision and interior object collision | Player collides without appearing on top of anything black. Player collides with NPCs and furniture in the room. ||
+|  8  | Press the E key when near Al Vos | Dialogue box appears on the bottom of the screen and displays Al Vos’ dialogue. Dialogue box disappears when dialogue concludes. ||
+|  9  | Exit Success Center | Screen fades to black. Black fades to Hinman location with the player on a pathway near the entrance to the success center location. Music for the corresponding location begins to play. ||
+|  10 | General Playtesting | Player collides with walls, and is able to walk on Hinman Quad. Player can enter all community buildings except for the Hinman Dining Hall. Player can interact with any NPC by being near them and pressing the E Key. ||
+|  11 | Random Encounter | Battle screen appears and allows the player to select various battle options. Player can exit these battles at will as they are just for showcasing the development of the feature. ||
+|  12 | Click red “X” button in top right corner of window | Game closes out properly. ||
