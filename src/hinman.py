@@ -113,27 +113,27 @@ class Hinman:
 			#SMITH HALL
 			"President Alex and Owen": trainer.Trainer(\
 			"President Alex and Owen",None,pygame.image.load('art/character_portraits/smith_president.png'),\
-			"The quick brown fox jumps over the lazy dog.",()),
+			"Alex: We got no hinmanmon here. --- Owen: But, we got some FR E SH A VOCA DO.",()),
 
 			"Academic VP Nancy and Katie": trainer.Trainer(\
 			"Academic VP Nancy and Katie",None,pygame.image.load('art/character_portraits/smith_academic.png'),\
-			"The quick brown fox jumps over the lazy dog.",()),
+			"If we were'nt friends with all the legendary hinmanmon, we would've caught them all.",()),
 
 			"Service VP Melanie": trainer.Trainer(\
 			"Service VP Melanie",None,pygame.image.load('art/character_portraits/smith_service.png'),\
-			"The quick brown fox jumps over the lazy dog.",()),
+			"I'll have you know, I accidentally beat the elite four and it only took me 1000 tries.",()),
 
 			"Social VP Isaac and Abby": trainer.Trainer(\
 			"Social VP Isaac and Abby",None,pygame.image.load('art/character_portraits/smith_social.png'),\
-			"The quick brown fox jumps over the lazy dog.",()),
+			"If you want to catch hinmanmon, don't critical hit.",()),
 
 			"Sam Atkin": trainer.Trainer(\
 			"Sam Atkin",None,pygame.image.load('art/character_portraits/sam.png'),\
-			"The quick brown fox jumps over the lazy dog.",()),
+			"Don't look at me too long. It's super effective.",()),
 
 			"PR Gabi and Shayna": trainer.Trainer(\
 			"PR Gabi and Shayna",None,pygame.image.load('art/character_portraits/smith_pr.png'),\
-			"The quick brown fox jumps over the lazy dog.",()),
+			"Let's go ride my magikarpet.",()),
 
 			#ROOSEVELT HALL
 			"President Colleen and Lexi": trainer.Trainer(\
@@ -142,7 +142,7 @@ class Hinman:
 
 			"Academic VP Phariha": trainer.Trainer(\
 			"Academic VP Phariha",None,pygame.image.load('art/character_portraits/roosevelt_academic.png'),\
-			"The quick brown fox jumps over the lazy dog.",()),
+			"On my way to steal yo hinmanmon.",()),
 
 			"Service VP Rebecca": trainer.Trainer(\
 			"Service VP Rebecca",None,pygame.image.load('art/character_portraits/roosevelt_service.png'),\
@@ -188,7 +188,7 @@ class Hinman:
 			#HUGHES HALL
 			"President Will": trainer.Trainer(\
 			"President Will",None,pygame.image.load('art/character_portraits/hughes_president.png'),\
-			"The quick brown fox jumps over the lazy dog.",()),
+			"You can't spell THICC without HCC.",()),
 
 			"Academic VP Briea and Hannah": trainer.Trainer(\
 			"Academic VP Briea and Hannah",None,pygame.image.load('art/character_portraits/hughes_academic.png'),\
@@ -213,7 +213,7 @@ class Hinman:
 			#CLEVELAND HALL
 			"President Daniel": trainer.Trainer(\
 			"President Daniel",None,pygame.image.load('art/character_portraits/cleveland_president.png'),\
-			"The quick brown fox jumps over the lazy dog.",()),
+			".",()),
 
 			"Academic VP Will": trainer.Trainer(\
 			"Academic VP Will",None,pygame.image.load('art/character_portraits/cleveland_academic.png'),\
