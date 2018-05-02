@@ -41,7 +41,8 @@ This screen represents the interior of the various residential halls in Hinman C
 ![alt text](screenshots/main_lounge.png "Hinman Building Interior")
 
 ![alt text](screenshots/dialogue.png "Hinman NPC Dialogue")
-***        
+
+***
 
 ## Program Design
 * You should have a list of any additional libraries or modules used (pygame, request) beyond non-standard python.
@@ -69,17 +70,19 @@ Front-end lead conducted significant research on using pygame to create visual a
 
 The back end specialist helped with the “Model” portion of BLOCKBUSTERS by writing the major classes that would be used in the main game, as well as implementing major pygame functionality into each of them. He also made headway in major game mechanics such as the basic paddle movement and advanced functionality such as the screen-wrap function for the paddle as it approached the ends of the screen. He collaborated with the Front End Specialist in the implementation of the classes into our Controller file, as well as develop our high-score database.
 
+***
+
 ## Testing
 
-### Menu Testing
+### 1. Menu Testing
 
 First, we run main.py and see if the game launches to the menu. Everything should be moving at the appropriate screen and the music should be playing. Then we press any key to continue as we are prompted to accelerate through the animation and fade to black. At this point, the opening cutscene dialogue from Al Vos will display on the screen, which can be accelerated if the user presses any key. After this brief opening scene, the player will appear inside the Hinman Success Center in Al Vos’ office, and can begin roaming the open world.
 
-### Game Testing
+### 2. Game Testing
 
 After the player is transported to the success center, we test to make sure the user’s input corresponds with the proper player movement direction and set of sprite animations e.g. UP corresponds with upwards movement and the upwards sprites, down corresponds with down, etc. After these tests are complete, we test to make sure the interaction method by triggering Al Vos’ dialogue to display. Then, we exit the success center location to ensure location transfer is functioning properly. At this point, the player should be in a new location and music should have started playing. We continue to enter and exit buildings and testing each NPCs dialogue as we approach them. When we have completed this, the next step is to trigger a random encounter on the Hinman Quad. Since it’s random, we walk around for a bit until it triggers. This is mainly to demonstrate the future implementation of these features.
 
-* A copy of your ATP
+***
 
 | Step                  | Procedure     | Expected Results  | Actual Results |
 | ----------------------|:-------------:| -----------------:| -------------- |
