@@ -7,14 +7,25 @@ from src import location
 from src import player
 from src import trainer
 
-#defines window dimensions
+'''
+Defines the window dimensions.
+'''
 WIDTH = 640
 HEIGHT = 480
 
+'''
+Defines the moves.
+'''
 MOVES = {"bop":5,"smash":10,"rotate":6}
 
 class Hinman:
 	def __init__(self):
+		'''
+		Sets up the window.
+		Defines each location, the character, character
+		direction, character's current location, and
+		dialogue of the trainers. 
+		'''
 		self.window = pygame.display.set_mode((WIDTH,HEIGHT))
 		self.locs = {
 			"hinman college":\
@@ -226,9 +237,16 @@ class Hinman:
 			}
 
 	def battleCalc(self,state):
+		'''
+		Prints battle state.
+		'''
 		print(state)
 
 	def encounter(self):
+		'''
+		Checks if character encounters 
+		the location of a building.
+		'''
 		if 760 < self.player.x - self.locs[self.current_loc].x < 1387 and 790 < self.player.y - self.locs[self.current_loc].y < 1445 and self.current_loc == "hinman college":
 			x = random.randrange(1,201)
 			if x > 199:
@@ -237,6 +255,10 @@ class Hinman:
 		return (False,None)
 
 	def interact(self,view,model):
+		'''
+		If character is in front of a
+		trainer, they're able to interact.
+		'''
 		offset = (self.player.x - self.locs[self.current_loc].x,self.player.y - self.locs[self.current_loc].y)
 		result = (self.locs[self.current_loc].transfer.overlap(self.player.mask,offset))
 
@@ -309,11 +331,19 @@ class Hinman:
 				view.dialogue(self.trainers["PR Jacob and Kass"])
 
 	def isNotCollided(self,player_x,player_y):
+		'''
+		Checks if character collides.
+		'''
 		offset = (player_x - self.locs[self.current_loc].x,player_y - self.locs[self.current_loc].y)
 		print(((player_x,player_y),offset))
 		return not(self.locs[self.current_loc].mask.overlap(self.player.mask, offset))
 
 	def locationChange(self,view):
+		'''
+		Loads in the destination of 
+		the character when entering/exiting
+		a building.
+		'''
 		offset = (self.player.x - self.locs[self.current_loc].x,self.player.y - self.locs[self.current_loc].y)
 		result = (self.locs[self.current_loc].transfer.overlap(self.player.mask,offset))
 			
@@ -346,6 +376,9 @@ class Hinman:
 		self.specificLoadzone(result,view,"cleveland","hinman college",302,214,lx=-113,ly=-1283,slx=0,sux=180,sly=40,suy=80)
 
 	def specificLoadzone(self,result,view,start,end,ex,ey,lx=None,ly=None,slx=0,sux=5000,sly=0,suy=5000):
+		'''
+		Function that creates the loadzones.
+		'''
 		if self.current_loc == start and slx < self.player.x - self.locs[self.current_loc].x < sux and sly < self.player.y - self.locs[self.current_loc].y < suy and result:
 			view.fadeOut()
 			self.current_loc = end
@@ -357,6 +390,9 @@ class Hinman:
 			view.fadeIn(self)
 
 	def moveLeft(self):
+		'''
+		Character movement to the left.
+		'''
 		if self.locs[self.current_loc].x >= 0 or self.player.x >= WIDTH//2 - self.player.width//2:
 			self.player.x -= self.player.velocity
 		else:
@@ -364,6 +400,9 @@ class Hinman:
 		self.player.direction = "left"
 
 	def moveRight(self):
+		'''
+		Character movement to the right.
+		'''
 		if self.locs[self.current_loc].x <= -self.locs[self.current_loc].width + WIDTH or self.player.x < WIDTH//2 - self.player.width//2:
 			self.player.x += self.player.velocity
 		else:
@@ -371,6 +410,9 @@ class Hinman:
 		self.player.direction = "right"
 
 	def moveUp(self):
+		'''
+		Character movement upward.
+		'''
 		if self.locs[self.current_loc].y >= 0 or self.player.y >= HEIGHT//2 - self.player.height//2:
 			self.player.y -= self.player.velocity
 		else:
@@ -378,6 +420,9 @@ class Hinman:
 		self.player.direction = "backward"
 
 	def moveDown(self):
+		'''
+		Character movement downward.
+		'''
 		if self.locs[self.current_loc].y <= -self.locs[self.current_loc].height + HEIGHT or self.player.y < HEIGHT//2 - self.player.height//2:
 			self.player.y += self.player.velocity
 		else:
@@ -385,5 +430,8 @@ class Hinman:
 		self.player.direction = "forward"
 
 	def musicChange(self):
+		'''
+		Function for changing music.
+		'''
 		pygame.mixer.music.load(self.locs[self.current_loc].music)
 		pygame.mixer.music.play(-1)
