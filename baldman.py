@@ -1,9 +1,0 @@
-import pygame
-import hinmanmon
-
-class Baldman(hinmanmon.Hinmanmon):
-	def __init__(self):
-		super().__init__()
-		self.name = "baldman"
-		self.type = "Harpur"
-		self.portrait = pygame.image.load('art/sprites/standing.png')
