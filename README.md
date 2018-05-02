@@ -78,15 +78,15 @@ This screen represents the interior of the various residential halls in Hinman C
 
 ## Tasks and Responsibilities
 
-### Software Lead - William Mosier
+### Software Lead - Michael Yip
 
-Worked as integration specialist by helping organize the code for the main game into the proper MVC format, which allowed all portions of the code to be run from a single file. He worked very closely with the back end to develop the high-score database functionality, as well as establish the win- and fail-states for the main game. He also lead the implementation of the ‘sprite’ and ‘group’ classes of pygame into the back end code.
+Worked closely with the Front End and Back End Specialists to create the test functions. Helped organize each class into its own file to fit the MVC format.
 
 ### Front End Specialist - Christopher Woloshyn
 
 Front-end lead conducted significant research on using pygame to create visual aspects such as buttons and on-screen text. She used this information to design and program a consistent UI to help the player navigate the title screen, the instructions page, and the “GAME OVER” screen. In addition to implementing the wide majority of the visual element for the UI, she also collaborated with the Software Lead to create a jukebox function that played music and to add sound effects to the menu navigation buttons.
 
-### Back End Specialist - Michael Yip
+### Back End Specialist - William Mosier
 
 The back end specialist helped with the “Model” portion of BLOCKBUSTERS by writing the major classes that would be used in the main game, as well as implementing major pygame functionality into each of them. He also made headway in major game mechanics such as the basic paddle movement and advanced functionality such as the screen-wrap function for the paddle as it approached the ends of the screen. He collaborated with the Front End Specialist in the implementation of the classes into our Controller file, as well as develop our high-score database.
 
