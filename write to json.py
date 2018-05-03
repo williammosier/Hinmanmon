@@ -10,6 +10,7 @@ def writeToJSONFile(path, filename, data):
 	data = jsonpickle.encode(data)
 	with open(filePathNameWExt, 'w') as fp:
 		json.dump(data, fp)
+	fp.close()
 
 path = 'dictionaries'
 filename = "locations"

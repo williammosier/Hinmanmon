@@ -241,7 +241,8 @@ class Hinman:
 		result = (self.locs[self.current_loc].transfer.overlap(self.player.mask,offset))
 
 		if model.current_loc == "success center":
-			view.dialogue(self.trainers["Al Vos"])
+			if 280 < offset[0] < 380 and 200 < offset[1] < 300 and result:
+				view.dialogue(self.trainers["Al Vos"])
 		if model.current_loc == "smith":
 			if 945 < offset[0] < 1020 and 50 < offset[1] < 125 and result:
 				view.dialogue(self.trainers["President Alex and Owen"])
