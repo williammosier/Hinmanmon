@@ -113,7 +113,7 @@ class Hinman:
 			#SMITH HALL
 			"President Alex and Owen": trainer.Trainer(\
 			"President Alex and Owen",None,pygame.image.load('art/character_portraits/smith_president.png'),\
-			"Alex: We got no hinmanmon here. --- Owen: But, we got some FR E SH A VOCA DO.",()),
+			"Alex: We got no hinmanmon here." + "           "  + "Owen: But, we got some FR E SH A VOCA DO.",()),
 
 			"Academic VP Nancy and Katie": trainer.Trainer(\
 			"Academic VP Nancy and Katie",None,pygame.image.load('art/character_portraits/smith_academic.png'),\
