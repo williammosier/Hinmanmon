@@ -2,6 +2,9 @@ import pygame
 
 class Player():
 	def __init__(self,sprites,x,y,pmask):
+		'''
+		Sets up the main character.
+		'''
 		self.sprites = sprites
 		self.x = x
 		self.y = y

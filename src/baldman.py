@@ -1,8 +1,11 @@
 import pygame
-import hinmanmon
+from src import hinmanmon
 
 class Baldman(hinmanmon.Hinmanmon):
 	def __init__(self):
+		'''
+		Creates Baldman.
+		'''
 		super().__init__()
 		self.name = "baldman"
 		self.type = "Harpur"

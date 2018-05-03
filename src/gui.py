@@ -1,6 +1,9 @@
 import pygame
 import time
 
+'''
+Dictionary of colors.
+'''
 COLORS = {
 	'black': (0,0,0),
 	'navy': (20,20,80),
@@ -13,11 +16,17 @@ COLORS = {
 
 class GUI:
 	def __init__(self,WIDTH,HEIGHT):
+		'''
+		Defines the window.
+		'''
 		self.window = pygame.display.set_mode((WIDTH,HEIGHT))
 		self.HEIGHT = HEIGHT
 		self.WIDTH = WIDTH
 
 	def battle(self,mon,trainer=None):
+		'''
+		Simulates a battle.
+		'''
 		self.window.blit(pygame.image.load('art/environment/battle_screen.jpg'),(0,0))
 		font = pygame.font.Font("art/font/AnonymousPro-Bold.ttf",20)
 		if trainer != None:
@@ -30,6 +39,9 @@ class GUI:
 		time.sleep(4)
 
 	def dialogue(self,trainer):
+		'''
+		A trainer's dialogue.
+		'''
 		font = pygame.font.Font("art/font/AnonymousPro-Bold.ttf",20)
 		self.drawTextBox(font,trainer)
 		time.sleep(.2)
@@ -78,6 +90,9 @@ class GUI:
 		pygame.display.update()
 
 	def fadeIn(self,model):
+		'''
+		Fading into battle.
+		'''
 		image = pygame.image.load("art/environment/fade.png")
 		for i in range(0,225,10):
 			self.window.blit(model.locs[model.current_loc].file,(model.locs[model.current_loc].x,model.locs[model.current_loc].y))
@@ -87,6 +102,9 @@ class GUI:
 			pygame.display.flip()
 
 	def fadeOut(self):
+		'''
+		Fading out of battle.
+		'''
 		image = pygame.image.load("art/environment/fade.png")
 		for i in range(225):
 			image.set_alpha(i)
@@ -95,6 +113,9 @@ class GUI:
 			pygame.time.delay(1)
 
 	def redrawBattle(self,state):
+		'''
+		Draws the battle screen.
+		'''
 		font = pygame.font.Font("art/font/AnonymousPro-Bold.ttf",20)
 		if state[2] == "dialogue screen":
 			self.window.blit(pygame.image.load('art/environment/battle_screen.jpg'),(0,0))

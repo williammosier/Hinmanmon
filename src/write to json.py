@@ -1,6 +1,6 @@
 import json
 import jsonpickle
-import location
+from src import location
 import pygame
 pygame.init()
 pygame.display.set_mode((640,480))

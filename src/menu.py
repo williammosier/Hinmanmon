@@ -6,6 +6,9 @@ HEIGHT = 480
 
 class SplashScreen:
 	def __init__(self,window):
+		'''
+		Defines the menu screen.
+		'''
 		self.window = window
 		self.bg = pygame.image.load("art/environment/menu/bg.png")
 		self.bg_clouds = pygame.image.load("art/environment/menu/bg_clouds.png")
@@ -33,6 +36,9 @@ class SplashScreen:
 					]
 
 	def scrollText(self,n):
+		'''
+		Scrolls through text when a key is pressed.
+		'''
 		self.window.blit(self.bg,(0,0))
 		font = pygame.font.Font("art/font/AnonymousPro-Bold.ttf",20)
 		time.sleep(.2)
@@ -73,6 +79,9 @@ class SplashScreen:
 					next_tile = False
 
 	def fadeOut(self):
+		'''
+		Defines an image fading out.
+		'''
 		image = pygame.image.load("art/environment/fade.png")
 		for i in range(0,225,2):
 			image.set_alpha(i)
@@ -88,6 +97,9 @@ class SplashScreen:
 		self.window.blit(pygame.transform.scale(self.title, (int(self.title_size_x),int(self.title_size_y))),(self.title_x,self.title_y))
 
 	def moveClouds(self):
+		'''
+		Defines cloud movement.
+		'''
 		self.bg_clouds_x += self.bg_clouds_v
 		self.fg_clouds_x += self.fg_clouds_v
 		self.playMusic()
@@ -102,14 +114,20 @@ class SplashScreen:
 		self.fg_clouds_y = 0
 
 	def playMusic(self):
+		'''
+		Plays music.
+		'''
 		if self.music_on:
 			pygame.mixer.music.play()
 			self.music_on = False			
 
 	def pressAnyKeyToContinue(self):
+		'''
+		Continue by pressing any key.
+		'''
 		font = pygame.font.Font("art/font/AnonymousPro-Bold.ttf",24)
 		for event in pygame.event.get():
-			if event.type == pygame.KEYDOWN:
+			if event.type == pygame.KEYDOWN and self.keypress:
 				self.bg_clouds_v *= 160
 				self.fg_clouds_v *= 80
 				self.keypress = False
@@ -120,6 +138,9 @@ class SplashScreen:
 			self.title_x += 8
 
 	def shrinkTitle(self):
+		'''
+		Title shrinks.
+		'''
 		self.title_x += .1
 		self.title_y += .024
 		self.title_size_x -= .2
@@ -127,6 +148,9 @@ class SplashScreen:
 		self.window.blit(pygame.transform.scale(self.title, (int(self.title_size_x),int(self.title_size_y))),(self.title_x,self.title_y))
 
 	def stopMusic(self):
+		'''
+		Stops music.
+		'''
 		pygame.mixer.music.fadeout(3000)
 
 	def titleAnimation(self):
@@ -140,6 +164,7 @@ class SplashScreen:
 			self.stopMusic()
 			self.pauseClouds()
 			self.fadeOut()
+			time.sleep(3)
 			self.cutscene += 1
 			self.bg = pygame.image.load('art/environment/fade.png')
 		if self.cutscene == 1:
@@ -148,6 +173,9 @@ class SplashScreen:
 			self.cutscene += 1
 
 	def update(self):
+		'''
+		Updating the menu.
+		'''
 		self.window.blit(self.bg,(0,0))
 		self.window.blit(self.bg_clouds,(self.bg_clouds_x,self.bg_clouds_y))
 		self.window.blit(self.fg_clouds,(self.fg_clouds_x,self.fg_clouds_y))

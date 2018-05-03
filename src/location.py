@@ -2,6 +2,9 @@ import pygame
 
 class Location:
 	def __init__(self,file,mask,transfer,music,x,y,width,height):
+		'''
+		Defines the location.
+		'''
 		self.file = file
 		self.x = x
 		self.y = y

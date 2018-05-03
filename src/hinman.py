@@ -1,20 +1,31 @@
 import pygame
 import random
 import time
-import baldman
-import hinmanmon
-import location
-import player
-import trainer
+from src import baldman
+from src import hinmanmon
+from src import location
+from src import player
+from src import trainer
 
-#defines window dimensions
+'''
+Defines the window dimensions.
+'''
 WIDTH = 640
 HEIGHT = 480
 
+'''
+Defines the moves.
+'''
 MOVES = {"bop":5,"smash":10,"rotate":6}
 
 class Hinman:
 	def __init__(self):
+		'''
+		Sets up the window.
+		Defines each location, the character, character
+		direction, character's current location, and
+		dialogue of the trainers. 
+		'''
 		self.window = pygame.display.set_mode((WIDTH,HEIGHT))
 		self.locs = {
 			"hinman college":\
@@ -102,27 +113,27 @@ class Hinman:
 			#SMITH HALL
 			"President Alex and Owen": trainer.Trainer(\
 			"President Alex and Owen",None,pygame.image.load('art/character_portraits/smith_president.png'),\
-			"The quick brown fox jumps over the lazy dog.",()),
+			"Alex: We got no hinmanmon here. --- Owen: But, we got some FR E SH A VOCA DO.",()),
 
 			"Academic VP Nancy and Katie": trainer.Trainer(\
 			"Academic VP Nancy and Katie",None,pygame.image.load('art/character_portraits/smith_academic.png'),\
-			"The quick brown fox jumps over the lazy dog.",()),
+			"If we were'nt friends with all the legendary hinmanmon, we would've caught them all.",()),
 
 			"Service VP Melanie": trainer.Trainer(\
 			"Service VP Melanie",None,pygame.image.load('art/character_portraits/smith_service.png'),\
-			"The quick brown fox jumps over the lazy dog.",()),
+			"I'll have you know, I accidentally beat the elite four and it only took me 1000 tries.",()),
 
 			"Social VP Isaac and Abby": trainer.Trainer(\
 			"Social VP Isaac and Abby",None,pygame.image.load('art/character_portraits/smith_social.png'),\
-			"The quick brown fox jumps over the lazy dog.",()),
+			"If you want to catch hinmanmon, don't critical hit.",()),
 
 			"Sam Atkin": trainer.Trainer(\
 			"Sam Atkin",None,pygame.image.load('art/character_portraits/sam.png'),\
-			"The quick brown fox jumps over the lazy dog.",()),
+			"Don't look at me too long. It's super effective.",()),
 
 			"PR Gabi and Shayna": trainer.Trainer(\
 			"PR Gabi and Shayna",None,pygame.image.load('art/character_portraits/smith_pr.png'),\
-			"The quick brown fox jumps over the lazy dog.",()),
+			"Let's go ride my magikarpet.",()),
 
 			#ROOSEVELT HALL
 			"President Colleen and Lexi": trainer.Trainer(\
@@ -131,7 +142,7 @@ class Hinman:
 
 			"Academic VP Phariha": trainer.Trainer(\
 			"Academic VP Phariha",None,pygame.image.load('art/character_portraits/roosevelt_academic.png'),\
-			"The quick brown fox jumps over the lazy dog.",()),
+			"On my way to steal yo hinmanmon.",()),
 
 			"Service VP Rebecca": trainer.Trainer(\
 			"Service VP Rebecca",None,pygame.image.load('art/character_portraits/roosevelt_service.png'),\
@@ -177,7 +188,7 @@ class Hinman:
 			#HUGHES HALL
 			"President Will": trainer.Trainer(\
 			"President Will",None,pygame.image.load('art/character_portraits/hughes_president.png'),\
-			"The quick brown fox jumps over the lazy dog.",()),
+			"You can't spell THICC without HCC.",()),
 
 			"Academic VP Briea and Hannah": trainer.Trainer(\
 			"Academic VP Briea and Hannah",None,pygame.image.load('art/character_portraits/hughes_academic.png'),\
@@ -202,7 +213,7 @@ class Hinman:
 			#CLEVELAND HALL
 			"President Daniel": trainer.Trainer(\
 			"President Daniel",None,pygame.image.load('art/character_portraits/cleveland_president.png'),\
-			"The quick brown fox jumps over the lazy dog.",()),
+			".",()),
 
 			"Academic VP Will": trainer.Trainer(\
 			"Academic VP Will",None,pygame.image.load('art/character_portraits/cleveland_academic.png'),\
@@ -226,9 +237,16 @@ class Hinman:
 			}
 
 	def battleCalc(self,state):
+		'''
+		Prints battle state.
+		'''
 		print(state)
 
 	def encounter(self):
+		'''
+		Checks if character encounters 
+		the location of a building.
+		'''
 		if 760 < self.player.x - self.locs[self.current_loc].x < 1387 and 790 < self.player.y - self.locs[self.current_loc].y < 1445 and self.current_loc == "hinman college":
 			x = random.randrange(1,201)
 			if x > 199:
@@ -237,6 +255,10 @@ class Hinman:
 		return (False,None)
 
 	def interact(self,view,model):
+		'''
+		If character is in front of a
+		trainer, they're able to interact.
+		'''
 		offset = (self.player.x - self.locs[self.current_loc].x,self.player.y - self.locs[self.current_loc].y)
 		result = (self.locs[self.current_loc].transfer.overlap(self.player.mask,offset))
 
@@ -256,6 +278,7 @@ class Hinman:
 				view.dialogue(self.trainers["Sam Atkin"])
 			if 1110 < offset[0] < 1170 and 20 < offset[1] < 60 and result:
 				view.dialogue(self.trainers["PR Gabi and Shayna"])
+
 		if model.current_loc == "roosevelt":
 			if 908 < offset[0] < 960 and 300 < offset[1] < 350 and result:
 				view.dialogue(self.trainers["President Colleen and Lexi"])
@@ -269,6 +292,7 @@ class Hinman:
 				view.dialogue(self.trainers["Financial VP Dyanna"])
 			if 1120 < offset[0] < 1180 and 360 < offset[1] < 400 and result:
 				view.dialogue(self.trainers["PR Shanté"])
+
 		if model.current_loc == "lehman":
 			if 1010 < offset[0] < 1075 and 300 < offset[1] < 355 and result:
 				view.dialogue(self.trainers["President Jenn and Sophia"])
@@ -282,6 +306,7 @@ class Hinman:
 				view.dialogue(self.trainers["Financial VP Megan"])
 			if 690 < offset[0] < 750 and 360 < offset[1] < 400 and result:
 				view.dialogue(self.trainers["PR Colleen"])
+
 		if model.current_loc == "hughes":
 			if 1000 < offset[0] < 1050 and 300 < offset[1] < 360 and result:
 				view.dialogue(self.trainers["President Will"])
@@ -295,6 +320,7 @@ class Hinman:
 				view.dialogue(self.trainers["Financial VP Ryan"])
 			if 650 < offset[0] < 700 and 220 < offset[1] < 250 and result:
 				view.dialogue(self.trainers["PR Brenna"])
+				
 		if model.current_loc == "cleveland":
 			if 940 < offset[0] < 1000 and 280 < offset[1] < 350 and result:
 				view.dialogue(self.trainers["President Daniel"])
@@ -310,11 +336,19 @@ class Hinman:
 				view.dialogue(self.trainers["PR Jacob and Kass"])
 
 	def isNotCollided(self,player_x,player_y):
+		'''
+		Checks if character collides.
+		'''
 		offset = (player_x - self.locs[self.current_loc].x,player_y - self.locs[self.current_loc].y)
 		print(((player_x,player_y),offset))
 		return not(self.locs[self.current_loc].mask.overlap(self.player.mask, offset))
 
 	def locationChange(self,view):
+		'''
+		Loads in the destination of 
+		the character when entering/exiting
+		a building.
+		'''
 		offset = (self.player.x - self.locs[self.current_loc].x,self.player.y - self.locs[self.current_loc].y)
 		result = (self.locs[self.current_loc].transfer.overlap(self.player.mask,offset))
 			
@@ -347,6 +381,9 @@ class Hinman:
 		self.specificLoadzone(result,view,"cleveland","hinman college",302,214,lx=-113,ly=-1283,slx=0,sux=180,sly=40,suy=80)
 
 	def specificLoadzone(self,result,view,start,end,ex,ey,lx=None,ly=None,slx=0,sux=5000,sly=0,suy=5000):
+		'''
+		Function that creates the loadzones.
+		'''
 		if self.current_loc == start and slx < self.player.x - self.locs[self.current_loc].x < sux and sly < self.player.y - self.locs[self.current_loc].y < suy and result:
 			view.fadeOut()
 			self.current_loc = end
@@ -358,6 +395,9 @@ class Hinman:
 			view.fadeIn(self)
 
 	def moveLeft(self):
+		'''
+		Character movement to the left.
+		'''
 		if self.locs[self.current_loc].x >= 0 or self.player.x >= WIDTH//2 - self.player.width//2:
 			self.player.x -= self.player.velocity
 		else:
@@ -365,6 +405,9 @@ class Hinman:
 		self.player.direction = "left"
 
 	def moveRight(self):
+		'''
+		Character movement to the right.
+		'''
 		if self.locs[self.current_loc].x <= -self.locs[self.current_loc].width + WIDTH or self.player.x < WIDTH//2 - self.player.width//2:
 			self.player.x += self.player.velocity
 		else:
@@ -372,6 +415,9 @@ class Hinman:
 		self.player.direction = "right"
 
 	def moveUp(self):
+		'''
+		Character movement upward.
+		'''
 		if self.locs[self.current_loc].y >= 0 or self.player.y >= HEIGHT//2 - self.player.height//2:
 			self.player.y -= self.player.velocity
 		else:
@@ -379,6 +425,9 @@ class Hinman:
 		self.player.direction = "backward"
 
 	def moveDown(self):
+		'''
+		Character movement downward.
+		'''
 		if self.locs[self.current_loc].y <= -self.locs[self.current_loc].height + HEIGHT or self.player.y < HEIGHT//2 - self.player.height//2:
 			self.player.y += self.player.velocity
 		else:
@@ -386,5 +435,8 @@ class Hinman:
 		self.player.direction = "forward"
 
 	def musicChange(self):
+		'''
+		Function for changing music.
+		'''
 		pygame.mixer.music.load(self.locs[self.current_loc].music)
 		pygame.mixer.music.play(-1)
