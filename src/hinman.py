@@ -107,8 +107,8 @@ class Hinman:
 		self.trainers = {
 			"Al Vos": trainer.Trainer(\
 			"Al Vos",None,pygame.image.load('art/character_portraits/al_vos.png'),\
-			"Hello, I'm Al Vos! Welcome to Hinman college! What the fuck did you just fucking say about me, you little bitch? "+\
-			"I’ll have you know I graduated top of my class in the Navy Seals, and I’ve been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills.",()),
+			"Hello, I'm Al Vos! Welcome to Hinman college! This campus inhabits various types of wild hinmanmon that you will likely encounter."+\
+			"There are many trainers who will help you on your journey. Good luck and have fun battling!",()),
 			
 			#SMITH HALL
 			"President Alex and Owen": trainer.Trainer(\
@@ -117,7 +117,7 @@ class Hinman:
 
 			"Academic VP Nancy and Katie": trainer.Trainer(\
 			"Academic VP Nancy and Katie",None,pygame.image.load('art/character_portraits/smith_academic.png'),\
-			"If we were'nt friends with all the legendary hinmanmon, we would've caught them all.",()),
+			"If we weren't friends with all the legendary hinmanmon, we would've caught them all.",()),
 
 			"Service VP Melanie": trainer.Trainer(\
 			"Service VP Melanie",None,pygame.image.load('art/character_portraits/smith_service.png'),\
@@ -125,7 +125,7 @@ class Hinman:
 
 			"Social VP Isaac and Abby": trainer.Trainer(\
 			"Social VP Isaac and Abby",None,pygame.image.load('art/character_portraits/smith_social.png'),\
-			"If you want to catch hinmanmon, don't critical hit.",()),
+			"If you want to catch a hinmanmon, just don't critical hit.",()),
 
 			"Sam Atkin": trainer.Trainer(\
 			"Sam Atkin",None,pygame.image.load('art/character_portraits/sam.png'),\
